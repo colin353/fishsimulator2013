@@ -3,7 +3,7 @@
 class Fish
 	constructor: (filename) ->
 		@filename = filename
-		@fish_raw = sync_get 'game/assets/'+filename
+		@fish_raw = sync_get 'game/assets/fish/'+filename
 
 		if !@fish_raw.name?
 			alert "Illegal fish \"#{filename}\""
@@ -44,11 +44,13 @@ class Fish
 
 
 		if(@position.x > viewcontroller.canvas.width - 0.5*viewcontroller.images[@image].image.width || @position.x < 0) 
-			@direction.x = Math.abs(@direction.x) * if @position.x > 0 then 1 else -1;
+			if @position.x < 0 then reverse = 1 else reverse = -1;
+			@direction.x = Math.abs(@direction.x) * reverse;
 			@direction.y = Math.random()-0.5 if @salt_ok()
 
 		if(@position.y > viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50|| @position.y < 0) 
-			@direction.y = Math.abs(@direction.y) * if @position.y > 0 then 1 else -1;
+			if @position.y < 0 then reverse = 1 else reverse = -1;
+			@direction.y = Math.abs(@direction.y) * reverse
 			@direction.x = Math.random()-0.5 if @salt_ok()
 
 		document.tank.waste += 0.02; 

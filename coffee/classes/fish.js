@@ -4,13 +4,14 @@ var Fish;
 Fish = (function() {
   function Fish(filename) {
     this.filename = filename;
-    this.fish_raw = sync_get('game/assets/' + filename);
+    this.fish_raw = sync_get('game/assets/fish/' + filename);
     if (this.fish_raw.name == null) {
       alert("Illegal fish \"" + filename + "\"");
     }
     this.image = this.fish_raw.image;
     this.price = this.fish_raw.price;
     this.name = this.fish_raw.name;
+    this.scale = 0.5;
     viewcontroller.loadImages(this.image);
     this.position = {
       x: 0,
@@ -31,10 +32,10 @@ Fish = (function() {
   };
 
   Fish.prototype.tick = function() {
-    var flip;
+    var flip, reverse;
 
     flip = this.direction.x < 0;
-    viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.5, flip);
+    viewcontroller.renderSprite(this.image, this.position.x, this.position.y, this.scale, flip);
     if (this.salt_ok() === true) {
       this.position.x += this.direction.x * 10;
       this.position.y += this.direction.y * 10;
@@ -49,13 +50,23 @@ Fish = (function() {
       }
     }
     if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < 0) {
-      this.direction.x = Math.abs(this.direction.x) * (this.position.x > 0 ? 1 : -1);
+      if (this.position.x < 0) {
+        reverse = 1;
+      } else {
+        reverse = -1;
+      }
+      this.direction.x = Math.abs(this.direction.x) * reverse;
       if (this.salt_ok()) {
         this.direction.y = Math.random() - 0.5;
       }
     }
     if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < 0) {
-      this.direction.y = Math.abs(this.direction.y) * (this.position.y > 0 ? 1 : -1);
+      if (this.position.y < 0) {
+        reverse = 1;
+      } else {
+        reverse = -1;
+      }
+      this.direction.y = Math.abs(this.direction.y) * reverse;
       if (this.salt_ok()) {
         this.direction.x = Math.random() - 0.5;
       }
