@@ -3,5 +3,6 @@
 	"price" : 1000,
 	"image" : "Coral4.png",
 	"happiness" : 100,
-	"scale" : 0.5
+	"scale" : 0.5,
+	"description" : "A Large coral that resembles a brain. Very expensive. +100 Happiness. -5 Aggressiveness."
 }

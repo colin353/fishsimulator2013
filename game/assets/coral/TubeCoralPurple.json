@@ -1,7 +1,8 @@
 {
-	"name" : "Large Purple Tube Coral",
+	"name" : "Medium Sized Branched Coral",
 	"price" : 500,
 	"image" : "Coral2.png",
 	"happiness" : 50,
-	"scale" : 0.5
+	"scale" : 0.5,
+	"description" : "A Medium-Sized coral with branches jutting out, Similar to tube coral. +50 Happiness"
 }

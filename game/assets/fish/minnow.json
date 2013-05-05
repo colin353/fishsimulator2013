@@ -3,7 +3,11 @@
 	"price" : 20,
 	"image" : "minnow.png",
 	"salt_max" : 30,
-	"salt_min" : 0
-	
-	
-}
+	"salt_min" : 0,
+	"aggressiveness" : 1,
+	"hitpoints" : 50,
+	"strength" : 1,
+	"growth_rate" : 1,
+	"crustacean" : 0,
+	"description" : "a Very inexpensive fish, Somewhat hardy, Very low salt tolerance, low aggression"
+}	 	

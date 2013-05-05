@@ -15,9 +15,10 @@ class Coral
 		
 		@position = {x: 0, y: 0};
 		@scale = 0.2;
-
+		@name = @coral_raw.name
+		@description = @coral_raw.description
 		@scale = @coral_raw.scale if @coral_raw.scale?
-		
+
 
 	tick: ->
 		

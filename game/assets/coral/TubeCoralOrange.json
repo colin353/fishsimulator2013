@@ -2,6 +2,7 @@
 	"name" : "Small Orange Tube Coral",
 	"price" : 100,
 	"image" : "Coral1.png",
-	"happiness" : 5,
-	"scale" : 0.3
+	"happiness" : 10,
+	"scale" : 0 ,
+	"description" : "A small, bright orange tube coral. +10 Happiness"
 }

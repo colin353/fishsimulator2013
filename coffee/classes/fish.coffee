@@ -15,9 +15,9 @@ class Fish
 		@crustacean = @fish_raw.crustacean
 		@scale = 0.5;
 		@scale = @fish_raw.scale if @fish_raw.scale?
-
+		@description = @fish_raw.description
 		viewcontroller.loadImages @image;
-		@position = {x: 0, y: 0};
+		@position = {x: 0, y: 0}; 
 		@direction = {x: Math.random(), y: Math.random()};
 
 	salt_ok: ->

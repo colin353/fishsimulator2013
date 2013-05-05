@@ -3,7 +3,7 @@
 	"price" : 100,
 	"image" : "clown-fish.png",
 	"salt_max" : 60,
-	"salt_min" : 25
+	"salt_min" : 25,
 	"aggressiveness" : 10,
 	"hitpoints" : 150,
 	"strength" : 5,

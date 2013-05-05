@@ -3,6 +3,11 @@
 	"price" : 100,
 	"image" : "clown-fish.png",
 	"salt_max" : 60,
-	"salt_min" : 25
-
+	"salt_min" : 25,
+	"aggressiveness" : 10,
+	"hitpoints" : 150,
+	"strength" : 5,
+	"growth_rate" : 4,
+	"crustacean" : 0,
+	"description" : "A beautiful reef-dwelling fish, Low aggresion, Needs marine conditions, High salt tolerance, Not very hardy."
 }
