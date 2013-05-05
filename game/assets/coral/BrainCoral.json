@@ -1,0 +1,7 @@
+{
+	"name" : "Brain Coral",
+	"price" : 1000,
+	"image" : "Coral4.png",
+	"happiness" : 100,
+	"scale" : 0.5
+}

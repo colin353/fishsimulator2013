@@ -78,6 +78,9 @@
         y: 0
       };
       this.scale = 0.2;
+      if (this.coral_raw.scale != null) {
+        this.scale = this.coral_raw.scale;
+      }
     }
 
     Coral.prototype.tick = function() {
@@ -98,7 +101,11 @@
       this.image = this.fish_raw.image;
       this.price = this.fish_raw.price;
       this.name = this.fish_raw.name;
+      this.crustacean = this.fish_raw.crustacean;
       this.scale = 0.5;
+      if (this.fish_raw.scale != null) {
+        this.scale = this.fish_raw.scale;
+      }
       viewcontroller.loadImages(this.image);
       this.position = {
         x: 0,
@@ -158,6 +165,9 @@
           this.direction.x = Math.random() - 0.5;
         }
       }
+      if (this.crustacean === 1) {
+        this.position.y = viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 51;
+      }
       return document.tank.waste += 0.02;
     };
 
@@ -171,9 +181,25 @@
       this.fishes = [];
       this.fishes.push(new Fish('clownfish.json'));
       this.fishes.push(new Fish('minnow.json'));
+      this.fishes.push(new Fish('hermitcrab.json'));
       this.corals = [];
-      this.corals.push(new Coral('coral.json'));
+      this.corals.push(new Coral('TubeCoralOrange.json'));
       this.corals[0].position = {
+        x: 200,
+        y: 200
+      };
+      this.corals.push(new Coral('TubeCoralPink.json'));
+      this.corals[1].position = {
+        x: 200,
+        y: 200
+      };
+      this.corals.push(new Coral('TubeCoralPurple.json'));
+      this.corals[2].position = {
+        x: 200,
+        y: 200
+      };
+      this.corals.push(new Coral('BrainCoral.json'));
+      this.corals[3].position = {
         x: 200,
         y: 200
       };
@@ -572,7 +598,7 @@
       if (image != null) {
         viewcontroller.loadImages(image);
       }
-      this.scale = 0.4;
+      this.scale = 0.2;
     }
 
     HandTool.prototype.click = function(x, y) {

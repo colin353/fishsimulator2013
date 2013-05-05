@@ -12,9 +12,10 @@ class Fish
 		@image = @fish_raw.image
 		@price = @fish_raw.price
 		@name = @fish_raw.name
-
+		@crustacean = @fish_raw.crustacean
 		@scale = 0.5;
-	
+		@scale = @fish_raw.scale if @fish_raw.scale?
+
 		viewcontroller.loadImages @image;
 		@position = {x: 0, y: 0};
 		@direction = {x: Math.random(), y: Math.random()};
@@ -53,4 +54,6 @@ class Fish
 			@direction.y = Math.abs(@direction.y) * reverse
 			@direction.x = Math.random()-0.5 if @salt_ok()
 
+		if @crustacean == 1
+			@position.y = viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 51
 		document.tank.waste += 0.02; 

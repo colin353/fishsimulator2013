@@ -16,6 +16,9 @@ class Coral
 		@position = {x: 0, y: 0};
 		@scale = 0.2;
 
+		@scale = @coral_raw.scale if @coral_raw.scale?
+		
+
 	tick: ->
 		
 		# First thing is to render the background image
