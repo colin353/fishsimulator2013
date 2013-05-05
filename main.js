@@ -105,7 +105,7 @@
         }
       }
       if (this.crustacean === 1) {
-        this.position.y = viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 51;
+        this.position.y = viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 120;
       }
       return document.tank.waste += 0.02;
     };

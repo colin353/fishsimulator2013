@@ -55,5 +55,5 @@ class Fish
 			@direction.x = Math.random()-0.5 if @salt_ok()
 
 		if @crustacean == 1
-			@position.y = viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 51
+			@position.y = viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 120
 		document.tank.waste += 0.02; 
