@@ -28,8 +28,9 @@ Fish = (function() {
     }
     if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height || this.position.y < 0) {
       this.direction.y = -this.direction.y;
-      return this.direction.x = Math.random() - 0.5;
+      this.direction.x = Math.random() - 0.5;
     }
+    return document.tank.waste += 0.02;
   };
 
   return Fish;

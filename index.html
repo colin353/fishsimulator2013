@@ -33,9 +33,14 @@ $(document).bind('touchmove', false);
 <div id=main>
 
 <canvas id="pokeCanvas" width="950" height="475" ></canvas>
-<div class=container>
+<div class="container-toolbar container">
 
-
+<ul class="nav tab-toolbar nav-tabs">
+  <li><a href="#home" data-toggle="tab">Home</a></li>
+  <li><a href="#profile" data-toggle="tab">Profile</a></li>
+  <li><a href="#messages" data-toggle="tab">Messages</a></li>
+  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+</ul>
 
 <div class="tab-content">
   <div class="tab-pane active" id="home">

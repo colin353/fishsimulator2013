@@ -24,4 +24,4 @@ class Fish
 			@direction.y = -@direction.y;
 			@direction.x = Math.random()-0.5;
 
-		
+		document.tank.waste += 0.02; 

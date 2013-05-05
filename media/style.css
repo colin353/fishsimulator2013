@@ -1,7 +1,5 @@
 
 * {
-	font-family: "Arial";
-	font-size: 48pt;
 	-webkit-user-select: none;
 }
 
@@ -9,8 +7,18 @@ input {
 	-webkit-user-select: text;
 }
 
+div.container-toolbar {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+}
+
 html {
 	background-color: #333333;
+}
+
+div.tab-content {
+	background-color: white;	
 }
 
 body, #main {
