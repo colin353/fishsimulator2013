@@ -23,4 +23,4 @@ class Pellet
 		# First thing is to render the background image
 		viewcontroller.renderSprite(@image,@position.x,@position.y,@scale) 
 		if(@position.y < viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50) 
-			@position.y += 4;
+			@position.y += 4; 
