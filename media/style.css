@@ -13,6 +13,12 @@ div.container-toolbar {
 	border-radius: 8px;
 }
 
+#tools {
+	position: absolute;
+	left: 200px;
+	top: 100px;	
+}
+
 html {
 	background-color: #333333;
 }
