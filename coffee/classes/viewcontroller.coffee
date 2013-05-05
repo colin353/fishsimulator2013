@@ -8,7 +8,7 @@
 #  asset loading, e.g. images.
 
 class ViewController
-	constructor: (selector = "pokeCanvas") ->
+	constructor: (selector = "pokeCanvas") -> 
 		@canvas = $("##{selector}").get(0)
 		@context = @canvas.getContext('2d')
 		@context.font = '30px "Pokemon GB"'
@@ -17,20 +17,20 @@ class ViewController
 		@images = [];
 		@map = [];
 		@stack = [];
-		@timestep = 30;
+		@timestep = 30; 
 		@inputstack = [];
 		@dpad_touchstate = [];
 
 		me = @;
 
-		# Register the button input here...
+		# Register the button input here... 
 		# e.g. bind x y z	
 		$(@canvas).mousedown (e) ->
-			me.canvasinput_mouseClick(e.pageX,e.pageY)
+			me.canvasinput_mouseClick(e.pageX,e.pageY) 
 
 		$(document).keypress (e) ->
 			e.preventDefault()
-			me.inputstack.push(new GInputEvent('K',e.keyCode,e.shiftKey));
+			me.inputstack.push(new GInputEvent('K',e.keyCode,e.shiftKey)); 	 
 
 		$('#dpad > div').bind('touchstart',@canvasinput_Dpad_down);
 		$('#dpad > div').mousedown(@canvasinput_Dpad_down);
