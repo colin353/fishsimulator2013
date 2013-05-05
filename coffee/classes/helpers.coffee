@@ -9,3 +9,6 @@ sync_get = (file) ->
 
 	jQuery.ajax { url: file, success: done, async: no }
 	retval
+
+md5 = (string) =>
+	hex_md5(string)

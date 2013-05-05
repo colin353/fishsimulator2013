@@ -3,7 +3,7 @@ var BuyMenuController;
 
 BuyMenuController = (function() {
   function BuyMenuController() {
-    var coral_files, f, fish_files, _i, _j, _len, _len1;
+    var a, coral_files, f, fish_files, unique, _i, _j, _k, _len, _len1, _len2, _ref;
 
     fish_files = sync_get('game/assets/glob.php?type=fish');
     fish_files = JSON.parse(fish_files);
@@ -20,6 +20,15 @@ BuyMenuController = (function() {
       this.corals.push(new Coral(f));
     }
     this.refresh();
+    _ref = this.fishes;
+    for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
+      a = _ref[_k];
+      unique = md5(a.filename);
+      $("#buythis" + unique).click(function() {
+        document.tool = new BuyTool(a, document.tool);
+        return alert("clicked");
+      });
+    }
   }
 
   BuyMenuController.prototype.refresh = function() {
@@ -36,7 +45,8 @@ BuyMenuController = (function() {
       html += this.buymenu_mediaObject({
         image: a.image,
         title: a.name,
-        text: desc
+        text: desc,
+        unique: md5(a.filename)
       });
     }
     return $("#buy").html(html);
@@ -45,7 +55,7 @@ BuyMenuController = (function() {
   BuyMenuController.prototype.buymenu_mediaObject = function(content) {
     var retval;
 
-    retval = "<div class='span3'><div class='media'><a class='pull-left' href='#'>				  <img class='media-object' style='width: 64px' src='game/images/" + content.image + "'>				  </a><div class='media-body'><h4 class='media-heading'>" + content.title + "</h4>				  	" + content.text + "</div></div></div>";
+    retval = "<div class='span3'><div class='media'><a class='pull-left' id='#buythis" + content.unique + "' href='#'>				  <img class='media-object' style='width: 64px' src='game/images/" + content.image + "'>				  </a><div class='media-body'><h4 class='media-heading'>" + content.title + "</h4>				  	" + content.text + "</div></div></div>";
     return retval;
   };
 

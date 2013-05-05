@@ -93,3 +93,13 @@ class HandTool
 		if @grabbed? 
 			@grabbed.position.x = x - @grabbed.scale * 0.5 * document.viewcontroller.images[@grabbed.image].image.width;
 			@grabbed.position.y = y - @grabbed.scale * 0.5 * document.viewcontroller.images[@grabbed.image].image.height;	
+
+class BuyTool
+	constructor: (purchased, previous_tool) ->
+		@purchased = purchased;
+		@prev_tool = previous_tool;
+
+	click: (x,y) ->
+		document.tankcontroller.fishes.push @purchased
+		document.tool = @prev_tool;
+		destroy @

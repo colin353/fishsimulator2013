@@ -15,6 +15,9 @@ Coral = (function() {
       y: 0
     };
     this.scale = 0.2;
+    if (this.coral_raw.scale != null) {
+      this.scale = this.coral_raw.scale;
+    }
   }
 
   Coral.prototype.tick = function() {
