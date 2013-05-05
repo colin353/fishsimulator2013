@@ -1,9 +1,19 @@
 # The Overlay
 
 class Fish
-	constructor: (image) ->
-		@image = image;  
-		viewcontroller.loadImages image;
+	constructor: (filename) ->
+		@filename = filename
+		@fish_raw = sync_get 'game/assets/'+filename
+
+		if !@fish_raw.name?
+			alert "Illegal fish \"#{filename}\""
+		
+
+		@image = @fish_raw.image
+		@price = @fish_raw.price
+		@name = @fish_raw.name
+
+		viewcontroller.loadImages @image;
 		@position = {x: 0, y: 0};
 		@direction = {x: Math.random(), y: Math.random()};
 
