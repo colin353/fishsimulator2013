@@ -11,7 +11,7 @@ class WarmTool
 	hold: (x,y)->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
 		if document.tank.temperature < 90
-		document.tank.temperature += 0.2;
+			document.tank.temperature += 0.2;
 
 
 class SpongeTool
@@ -54,3 +54,30 @@ class CoolTool
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
 		if document.tank.temperature > 45 
 			document.tank.temperature -= 0.2;
+
+
+class SaltTool
+	constructor: (image) ->
+		@image = image;  
+		viewcontroller.loadImages image if image?
+		@scale = 0.5;
+
+	click: (x,y) ->
+		yes
+
+	hold:(x,y) ->
+		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
+		if document.tank.salt < 100
+			document.tank.salt += 0.2;
+
+class HandTool
+	constructor: (image) ->
+		@image = image;  
+		viewcontroller.loadImages image if image?
+		@scale = 0.4;
+
+	click: (x,y) ->
+		yes
+
+	hold:(x,y) ->
+		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?

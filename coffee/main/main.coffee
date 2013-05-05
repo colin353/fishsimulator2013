@@ -11,7 +11,9 @@ $ ->
 	document.tools['feed'] = new FeedTool('FishFood.png')
 	document.tools['warm'] = new WarmTool('heattool.png')
 	document.tools['cool'] = new CoolTool('icecube.png')
-	document.tool = document.tools['sponge'];
+	document.tools['salt'] = new SaltTool('salt.png')
+	document.tools['hand'] = new HandTool('hand.png')
+	document.tool = document.tools['hand'];
 
 tick = ->
 	viewcontroller.tick()
