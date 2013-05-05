@@ -7,9 +7,25 @@ FishTankCanvasController = (function() {
     this.fishes = [];
     this.fishes.push(new Fish('clownfish.json'));
     this.fishes.push(new Fish('minnow.json'));
+    this.fishes.push(new Fish('hermitcrab.json'));
     this.corals = [];
-    this.corals.push(new Coral('coral.json'));
+    this.corals.push(new Coral('TubeCoralOrange.json'));
     this.corals[0].position = {
+      x: 200,
+      y: 200
+    };
+    this.corals.push(new Coral('TubeCoralPink.json'));
+    this.corals[1].position = {
+      x: 200,
+      y: 200
+    };
+    this.corals.push(new Coral('TubeCoralPurple.json'));
+    this.corals[2].position = {
+      x: 200,
+      y: 200
+    };
+    this.corals.push(new Coral('BrainCoral.json'));
+    this.corals[3].position = {
       x: 200,
       y: 200
     };

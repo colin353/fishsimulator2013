@@ -100,6 +100,6 @@ class BuyTool
 		@prev_tool = previous_tool;
 
 	click: (x,y) ->
-		document.tankcontroller.fishes.push @purchased
+		document.tankcontroller.fishes.push new Fish(@purchased.filename)
 		document.tool = @prev_tool;
-		destroy @
+		delete @
