@@ -36,7 +36,7 @@ $(document).bind('touchmove', false);
 <div class="container-toolbar container">
 
 <ul class="nav tab-toolbar nav-tabs">
-  <li><a href="#stats" data-toggle="tab">Stats</a></li>
+  <li><a href="#stats" id=stats_link data-toggle="tab">Stats</a></li>
   <li><a href="#buy" data-toggle="tab">Buy</a></li>
   <li><a href="#sell" data-toggle="tab">Sell</a></li>
 </ul>
@@ -63,10 +63,33 @@ $(document).bind('touchmove', false);
   </div>
 
    <div class="tab-pane active" id="buy">
-   		Test2
+   	<div class="row">
+      <div class="span3">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" style="width: 64px" src="game/images/clown-fish.png">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+            Media content
+          </div>
+        </div>
+      </div>
+      <div class="span3">
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" style="width: 64px" src="game/images/minnow.png">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading">Media heading</h4>
+            Media content
+          </div>
+        </div>
+      </div>
+
    </div>
    <div class="tab-pane active" id="sell">
-   		Test2
+   		
    </div>
 </div>
 
@@ -75,7 +98,7 @@ $(document).bind('touchmove', false);
    <div id="tools">
    		<br /><br />
 
-          <div class="btn-group">
+     <div class="btn-group">
       <button class="btn" id=handtool>Hand</button>
     </div>
     <br /> <br />
@@ -102,7 +125,7 @@ $(document).bind('touchmove', false);
 <script>
 
 $(function() {
-	$("#toolTab").tab();
+	$("#stats_link").tab('show');
 })
 
 $('.nav-tabs a').click(function (e) {
