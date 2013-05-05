@@ -85,6 +85,9 @@
 
   FishTankCanvasController = (function() {
     function FishTankCanvasController() {
+      var me;
+
+      me = this;
       this.relinquishcontrol = false;
       this.fishes = [];
       this.fishes.push(new Fish('clownfish.json'));
@@ -97,6 +100,7 @@
       };
       this.tank = new Tank('TankBackground.jpg');
       document.tank = this.tank;
+      document.tankcontroller = this;
     }
 
     FishTankCanvasController.prototype.tick = function() {
@@ -484,6 +488,7 @@
 
   HandTool = (function() {
     function HandTool(image) {
+      this.grabbed = null;
       this.image = image;
       if (image != null) {
         viewcontroller.loadImages(image);
@@ -492,12 +497,30 @@
     }
 
     HandTool.prototype.click = function(x, y) {
+      var distance, i, xs, ys, _i, _ref;
+
+      this.grabbed = null;
+      for (i = _i = 0, _ref = document.tankcontroller.fishes.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        document.tankcontroller.fishes[i].scale = 0.5;
+        xs = document.tankcontroller.fishes[i].position.x - x + document.tankcontroller.fishes[i].scale * 0.5 * document.viewcontroller.images[document.tankcontroller.fishes[i].image].image.width;
+        xs = xs * xs;
+        ys = document.tankcontroller.fishes[i].position.y - y + document.tankcontroller.fishes[i].scale * 0.5 * document.viewcontroller.images[document.tankcontroller.fishes[i].image].image.height;
+        ys = ys * ys;
+        distance = Math.sqrt(xs + ys);
+        if (distance < 50) {
+          this.grabbed = document.tankcontroller.fishes[i];
+        }
+      }
       return true;
     };
 
     HandTool.prototype.hold = function(x, y) {
       if (this.image != null) {
-        return viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
+        viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
+      }
+      if (this.grabbed != null) {
+        this.grabbed.position.x = x - this.grabbed.scale * 0.5 * document.viewcontroller.images[this.grabbed.image].image.width;
+        return this.grabbed.position.y = y - this.grabbed.scale * 0.5 * document.viewcontroller.images[this.grabbed.image].image.height;
       }
     };
 

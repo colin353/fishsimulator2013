@@ -72,12 +72,26 @@ class SaltTool
 
 class HandTool
 	constructor: (image) ->
+		@grabbed = null;
 		@image = image;  
 		viewcontroller.loadImages image if image?
 		@scale = 0.4;
 
 	click: (x,y) ->
+		@grabbed = null;
+		for i in [0...document.tankcontroller.fishes.length]
+			document.tankcontroller.fishes[i].scale = 0.5
+			xs = document.tankcontroller.fishes[i].position.x - x + document.tankcontroller.fishes[i].scale * 0.5 * document.viewcontroller.images[document.tankcontroller.fishes[i].image].image.width
+			xs = xs * xs
+			ys = document.tankcontroller.fishes[i].position.y - y + document.tankcontroller.fishes[i].scale * 0.5 * document.viewcontroller.images[document.tankcontroller.fishes[i].image].image.height
+			ys = ys * ys
+			distance = Math.sqrt( xs + ys )
+			if distance < 50
+				@grabbed = document.tankcontroller.fishes[i]
 		yes
 
 	hold:(x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
+		if @grabbed? 
+			@grabbed.position.x = x - @grabbed.scale * 0.5 * document.viewcontroller.images[@grabbed.image].image.width;
+			@grabbed.position.y = y - @grabbed.scale * 0.5 * document.viewcontroller.images[@grabbed.image].image.height;	
