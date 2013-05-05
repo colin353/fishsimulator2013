@@ -12,7 +12,7 @@ class FishTankCanvasController
 		@fishes = [];
 		@fishes.push new Fish('clownfish.json')
 		@fishes.push new Fish('minnow.json')
-
+		@fishes.push new Fish('hermitcrab.json')
 		@corals = [];
 		@corals.push new Coral('TubeCoralOrange.json')
 		@corals[0].position = {x: 200, y:200}

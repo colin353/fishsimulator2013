@@ -40,7 +40,11 @@
       this.image = this.fish_raw.image;
       this.price = this.fish_raw.price;
       this.name = this.fish_raw.name;
+      this.crustacean = this.fish_raw.crustacean;
       this.scale = 0.5;
+      if (this.fish_raw.scale != null) {
+        this.scale = this.fish_raw.scale;
+      }
       viewcontroller.loadImages(this.image);
       this.position = {
         x: 0,
@@ -100,6 +104,9 @@
           this.direction.x = Math.random() - 0.5;
         }
       }
+      if (this.crustacean === 1) {
+        this.position.y = viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 51;
+      }
       return document.tank.waste += 0.02;
     };
 
@@ -113,6 +120,7 @@
       this.fishes = [];
       this.fishes.push(new Fish('clownfish.json'));
       this.fishes.push(new Fish('minnow.json'));
+      this.fishes.push(new Fish('hermitcrab.json'));
       this.corals = [];
       this.corals.push(new Coral('TubeCoralOrange.json'));
       this.corals[0].position = {
