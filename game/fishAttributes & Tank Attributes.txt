@@ -1,0 +1,60 @@
+Fish Simulator 2013:
+
+Fish Main Attributes/Needs
+
+Size 
+Bio-Load
+Happiness
+Aggressiveness
+Hunger
+Health
+
+Tank Main Attributes
+
+Filtration Level
+Waste Level
+Ammonia Level
+Population
+Total Bio-Load
+Salinity
+Temperature
+
+int growthTimer = 200 / growthRate;
+---> Tick Function (
+if (hunger < 100) {
+hunger += 0.5;
+} 
+if (hunger < 50) {
+health = health - (hunger * hungerHealthReduction);
+}
+Aggressiveness = SpeciesAgressiveness + (HealthAggressiveness * health);
+Aggressiveness = Aggressiveness + (hunger * HungerAggressiveness);
+
+if (fishDist <= 5) {
+willfight(fisha,fishb);
+}
+
+public static boolean willFight(fish a, fish b) {
+random integer
+if (randomInt > (DefaultFightChance + aggressiveness))
+return true
+}else 
+return false
+}
+
+If (willFight(fisha,fishb) = true) {
+integer fishaChance = 0;
+integer fishbChance = 0;
+
+fishaChance = fishaChance + (Aggressiveness*AgroFightAdv) + SpeciesStrength - (hunger * hungerFightDisAdv) + (size * sizeFightAdv);
+
+
+fishbChance = fishbChance + (Aggressiveness*AgroFightAdv) + SpeciesStrength - (hunger * hungerFightDisAdv) + (size * sizeFightAdv);
+
+if (fishaChance > fishbChance) {
+fishbDead = true;
+fishaHunger = fishaHunger - (10*fishbSize)
+} else {
+fishaDead = true;
+fishbHunger = fishbHunger - (10*fishaSize)
+}
