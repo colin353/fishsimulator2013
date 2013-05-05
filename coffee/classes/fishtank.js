@@ -37,6 +37,9 @@ FishTankCanvasController = (function() {
       if (a.type === 'M') {
         document.tool.click(a.x, a.y);
       }
+      if (a.type === 'MD') {
+        document.tool.hold(a.x, a.y);
+      }
     }
     return true;
   };

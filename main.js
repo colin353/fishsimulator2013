@@ -93,6 +93,9 @@
         if (a.type === 'M') {
           document.tool.click(a.x, a.y);
         }
+        if (a.type === 'MD') {
+          document.tool.hold(a.x, a.y);
+        }
       }
       return true;
     };
@@ -188,6 +191,7 @@
           this.shift = data[1];
           break;
         case 'M':
+        case 'MD':
           this.x = data[0];
           this.y = data[1];
           break;
@@ -425,9 +429,24 @@
       this.timestep = 30;
       this.inputstack = [];
       this.dpad_touchstate = [];
+      this.mousedown = false;
+      this.mousepos = {
+        x: 0,
+        y: 0
+      };
       me = this;
+      $(document).mouseup(function(e) {
+        return me.mousedown = false;
+      });
+      $(document).mousemove(function(e) {
+        return me.mousepos = {
+          x: e.pageX,
+          y: e.pageY
+        };
+      });
       $(this.canvas).mousedown(function(e) {
-        return me.canvasinput_mouseClick(e.pageX, e.pageY);
+        me.canvasinput_mouseClick(e.pageX, e.pageY);
+        return me.mousedown = true;
       });
       $(document).keypress(function(e) {
         e.preventDefault();
@@ -497,9 +516,18 @@
       return this.inputstack.push(new GInputEvent('M', x, y));
     };
 
+    ViewController.prototype.canvasinput_mouseDrag = function(x, y) {
+      x = Math.floor(x - $(this.canvas).offset().left);
+      y = Math.floor(y - $(this.canvas).offset().top);
+      return this.inputstack.push(new GInputEvent('MD', x, y));
+    };
+
     ViewController.prototype.tick = function() {
       if (!this.ready()) {
-        return alert("Not ready yet...");
+        return false;
+      }
+      if (this.mousedown === true) {
+        this.canvasinput_mouseDrag(this.mousepos.x, this.mousepos.y);
       }
       this.stack[0].tick();
       this.inputstack = [];

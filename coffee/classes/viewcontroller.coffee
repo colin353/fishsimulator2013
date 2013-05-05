@@ -23,12 +23,23 @@ class ViewController
 		@inputstack = [];
 		@dpad_touchstate = [];
 
+		@mousedown = no
+		@mousepos = {x:0, y:0}
+
 		me = @;
 
 		# Register the button input here...
 		# e.g. bind x y z	
+
+		$(document).mouseup (e) ->
+			me.mousedown = no
+
+		$(document).mousemove (e) ->
+			me.mousepos = {x: e.pageX, y: e.pageY}
+
 		$(@canvas).mousedown (e) ->
 			me.canvasinput_mouseClick(e.pageX,e.pageY)
+			me.mousedown = yes
 
 		$(document).keypress (e) ->
 			e.preventDefault()
@@ -71,11 +82,20 @@ class ViewController
 		#alert "#{x}, #{y}" 
 		@inputstack.push new GInputEvent('M',x,y)
 
+	canvasinput_mouseDrag: (x,y) ->
+		x = Math.floor(x-$(@.canvas).offset().left)
+		y = Math.floor(y-$(@.canvas).offset().top)
+		@inputstack.push new GInputEvent('MD',x,y)
+
 	tick: ->
 		#if !@stack? 
 		#	return no;
 
-		return alert "Not ready yet..." if !@ready()
+		return no if !@ready()
+
+		if @mousedown == yes
+			@canvasinput_mouseDrag @mousepos.x, @mousepos.y
+			#alert "Got dat mouse down"
 
 		@stack[0].tick()
 
