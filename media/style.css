@@ -16,6 +16,7 @@ html {
 div#main {
 	display: block;
 	margin-left: auto;
+	background-color: black;
 	margin-right: auto;
 	width: 750px;
 }

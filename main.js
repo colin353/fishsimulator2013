@@ -48,6 +48,7 @@
       this.count = 0;
       this.fishes = [];
       this.fishes.push(new Fish('clown-fish.png'));
+      this.fishes.push(new Fish('minnow.png'));
       this.corals = [];
       this.corals.push(new Coral('Coral1.png'));
       this.corals[0].position = {

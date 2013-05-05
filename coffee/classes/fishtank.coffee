@@ -11,6 +11,7 @@ class FishTankCanvasController
 
 		@fishes = [];
 		@fishes.push new Fish('clown-fish.png');
+		@fishes.push new Fish('minnow.png')
 
 		@corals = [];
 		@corals.push new Coral('Coral1.png')
