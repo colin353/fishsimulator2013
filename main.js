@@ -17,6 +17,9 @@
         y: 0
       };
       this.scale = 0.2;
+      if (this.coral_raw.scale != null) {
+        this.scale = this.coral_raw.scale;
+      }
     }
 
     Coral.prototype.tick = function() {
@@ -111,8 +114,23 @@
       this.fishes.push(new Fish('clownfish.json'));
       this.fishes.push(new Fish('minnow.json'));
       this.corals = [];
-      this.corals.push(new Coral('coral.json'));
+      this.corals.push(new Coral('TubeCoralOrange.json'));
       this.corals[0].position = {
+        x: 200,
+        y: 200
+      };
+      this.corals.push(new Coral('TubeCoralPink.json'));
+      this.corals[1].position = {
+        x: 200,
+        y: 200
+      };
+      this.corals.push(new Coral('TubeCoralPurple.json'));
+      this.corals[2].position = {
+        x: 200,
+        y: 200
+      };
+      this.corals.push(new Coral('BrainCoral.json'));
+      this.corals[3].position = {
         x: 200,
         y: 200
       };
@@ -511,7 +529,7 @@
       if (image != null) {
         viewcontroller.loadImages(image);
       }
-      this.scale = 0.4;
+      this.scale = 0.2;
     }
 
     HandTool.prototype.click = function(x, y) {

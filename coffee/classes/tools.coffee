@@ -75,7 +75,7 @@ class HandTool
 		@grabbed = null;
 		@image = image;  
 		viewcontroller.loadImages image if image?
-		@scale = 0.4;
+		@scale = 0.2;
 
 	click: (x,y) ->
 		@grabbed = null;
