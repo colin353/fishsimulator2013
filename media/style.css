@@ -1,0 +1,219 @@
+@font-face
+{
+	font-family: "Pokemon GB";
+	font-weight: normal;
+	font-style: normal;
+	src: 	url("Pokemon GB.woff") format('woff'),
+		url("Pokemon GB.otf") format('opentype');
+}
+
+* {
+	font-family: "Pokemon GB";
+	font-size: 48pt;
+	-webkit-user-select: none;
+}
+
+input {
+	-webkit-user-select: text;
+}
+
+html {
+	background-color: black;
+}
+
+div#main {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 750px;
+}
+
+div.blocker {
+	display:inline-block;
+	width: 112px;
+	height: 112px;
+	margin: 0px;
+}
+
+div#main > * {
+	display:block;
+	margin-top: 00px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#welcome {
+	background-image: url('../images/overlay_mid.png');
+	width: 620px;
+	margin-top: 20px;
+	text-align:center;
+	display:block;
+	padding: 10px;
+	border-radius: 2px;
+	margin-bottom: 20px;
+}
+
+span.newc_title {
+	font-size: 30pt;
+	display:block;
+	margin-bottom: 15px;
+}
+
+div#welcome > span {
+}
+
+div#welcome div#welcome_top {
+	background-image: url('../images/overlay_top.png');
+	display:block;
+	height: 33px;
+	width: 640px;
+	margin-left: 0px;
+	margin-top: 0px;
+	position: relative;
+	top: -25px;
+	left: -10px;
+}
+
+div#welcome div#welcome_bottom {
+	background-image: url('../images/overlay_bottom.png');
+	display:block;
+	height: 37px;
+	width: 640px;
+	margin-left: 0px;
+	position:relative;
+	top: 25px;
+	left: -10px;
+}
+
+div#welcome div#welcome_container {
+	height: 100%;
+	display:block;
+}
+
+div#welcome  input {
+	text-align:center;
+	width: 500px;
+	height: 50px;
+	font-size: 40pt;
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	border: none;
+	text-transform: lowercase;
+	background-color: transparent;	
+}
+
+div#control_box {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 500px;
+}
+
+div#control_box > span > a {
+	text-decoration: none;
+	padding: 8px;
+	text-align: center;
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+	border-radius: 5px;
+	font-size: 20pt;
+}
+
+div.stats span {
+	font-size: 30pt;
+	margin-bottom: 40px;
+}
+
+div.stats a {
+	text-decoration: none;
+	color: black;
+	font-size: 30pt;
+}
+div.stats .modifier {
+	float:right;
+}
+
+span#go {
+	float: right;
+}
+
+#pokeCanvas {
+	-webkit-user-select: none;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 5px solid black;
+}
+
+div#startselect {
+	display:block;
+	height: 30px;
+	width: 150px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div#start, div#select {
+	display: inline-block;
+	width: 50px;
+	height: 20px;
+	border-radius:5px;
+	border: 2px solid #333333;
+}
+
+div#start {
+	float: right;
+}
+div#select {
+	float: left;
+}
+
+#dpad {
+	float:left;
+	width: 200px;
+	margin-top: 20px;
+}
+
+#dpad > div {
+	-webkit-user-select: none;
+	border: 2px solid #333333;
+	display:inline-block;
+	width: 50px;
+	height: 50px;
+	border-radius: 5px;
+}
+
+#dpad_u, #dpad_d {
+	margin-left: 60px;
+	margin-right: 60px;
+}
+
+#buttons {
+	float:right;
+	margin-top: 40px;
+}
+
+#buttons > div {
+	-webkit-user-select: none;
+	border: 2px solid #333333;
+	display:inline-block;
+	width: 70px;
+	height: 70px;
+	border-radius: 50px;
+}
+
+#loadgif {
+	position:absolute;
+	display:none;
+	top: 0;
+	left: 0;
+	width: 20px;
+	display:none;
+}
+
+#button_b {
+	position:relative;
+	top: 80px;
+}
