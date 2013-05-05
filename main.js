@@ -57,7 +57,7 @@
         this.direction.x = -this.direction.x;
         this.direction.y = Math.random() - 0.5;
       }
-      if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height || this.position.y < 0) {
+      if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < 0) {
         this.direction.y = -this.direction.y;
         this.direction.x = Math.random() - 0.5;
       }

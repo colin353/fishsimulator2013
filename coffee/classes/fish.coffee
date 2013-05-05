@@ -34,7 +34,7 @@ class Fish
 			@direction.x = -@direction.x;
 			@direction.y = Math.random()-0.5;
 
-		if(@position.y > viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height || @position.y < 0) 
+		if(@position.y > viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50|| @position.y < 0) 
 			@direction.y = -@direction.y;
 			@direction.x = Math.random()-0.5;
 
