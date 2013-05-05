@@ -12,7 +12,13 @@ document.viewcontroller = viewcontroller;
 $(function() {
   document.tools = [];
   document.tools['sponge'] = new SpongeTool('sponge3.png');
-  return document.tool = document.tools['sponge'];
+  document.tools['feed'] = new FeedTool('FishFood.png');
+  document.tools['warm'] = new WarmTool('heattool.png');
+  document.tools['cool'] = new CoolTool('icecube.png');
+  document.tools['salt'] = new SaltTool('salt.png');
+  document.tools['hand'] = new HandTool('hand.png');
+  document.tool = document.tools['hand'];
+  return document.buymenu = new BuyMenuController();
 });
 
 tick = function() {

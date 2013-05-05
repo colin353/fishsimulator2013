@@ -26,9 +26,6 @@ class FishTankCanvasController
 		document.tank = @tank;
 		document.tankcontroller = @
 
-		
-
-
 	tick: ->
 		
 		# First thing is to render the background image

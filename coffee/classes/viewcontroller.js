@@ -47,6 +47,21 @@ ViewController = (function() {
     $("#spongetool").click(function() {
       return document.tool = document.tools['sponge'];
     });
+    $("#warmtool").click(function() {
+      return document.tool = document.tools['warm'];
+    });
+    $("#cooltool").click(function() {
+      return document.tool = document.tools['cool'];
+    });
+    $("#foodtool").click(function() {
+      return document.tool = document.tools['feed'];
+    });
+    $("#handtool").click(function() {
+      return document.tool = document.tools['hand'];
+    });
+    $("#salttool").click(function() {
+      return document.tool = document.tools['salt'];
+    });
   }
 
   ViewController.prototype.ready = function() {

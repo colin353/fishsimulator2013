@@ -5,6 +5,7 @@
 #= require inputevent.coffee
 #= require fisntank.coffee
 #= require tools.coffee
+#= require buymenu.coffee
 
 #  The view controller is an abstraction for the canvas, and drawing is done through it. It also manages 
 #  asset loading, e.g. images.
