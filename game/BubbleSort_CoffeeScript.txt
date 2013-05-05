@@ -1,0 +1,20 @@
+a = [2,24,52,11,78,92,44,23,8];
+again = true
+while again == true
+	again = false
+	for i in [0...a.length - 1]
+		first = a[i]
+		second = a[i+1]
+
+		if first > second	 
+			a[i + 1] = a[i]
+			a[i] = second
+			again = true
+alert a 
+
+
+
+alert "test"
+
+
+return;
