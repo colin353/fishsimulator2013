@@ -8,7 +8,7 @@ class Fish
 		if !@fish_raw.name?
 			alert "Illegal fish \"#{filename}\""
 		
-
+		@type = 'fish';
 		@image = @fish_raw.image
 		@price = @fish_raw.price
 		@name = @fish_raw.name

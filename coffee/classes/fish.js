@@ -8,10 +8,16 @@ Fish = (function() {
     if (this.fish_raw.name == null) {
       alert("Illegal fish \"" + filename + "\"");
     }
+    this.type = 'fish';
     this.image = this.fish_raw.image;
     this.price = this.fish_raw.price;
     this.name = this.fish_raw.name;
+    this.crustacean = this.fish_raw.crustacean;
     this.scale = 0.5;
+    if (this.fish_raw.scale != null) {
+      this.scale = this.fish_raw.scale;
+    }
+    this.description = this.fish_raw.description;
     viewcontroller.loadImages(this.image);
     this.position = {
       x: 0,
@@ -70,6 +76,9 @@ Fish = (function() {
       if (this.salt_ok()) {
         this.direction.x = Math.random() - 0.5;
       }
+    }
+    if (this.crustacean === 1) {
+      this.position.y = viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 120;
     }
     return document.tank.waste += 0.02;
   };

@@ -175,15 +175,38 @@ HandTool = (function() {
 })();
 
 BuyTool = (function() {
-  function BuyTool(purchased, previous_tool) {
+  function BuyTool(purchased, type, previous_tool) {
     this.purchased = purchased;
+    this.type = type;
     this.prev_tool = previous_tool;
   }
 
   BuyTool.prototype.click = function(x, y) {
-    document.tankcontroller.fishes.push(new Fish(this.purchased.filename));
+    var a;
+
+    switch (this.type) {
+      case 'fish':
+        a = new Fish(this.purchased);
+        a.position = {
+          x: x,
+          y: y
+        };
+        document.tankcontroller.fishes.push(a);
+        break;
+      case 'coral':
+        a = new Coral(this.purchased);
+        a.position = {
+          x: x - a.scale * document.viewcontroller.images[a.image].image.width * 0.5,
+          y: y - a.scale * document.viewcontroller.images[a.image].image.width * 0.5
+        };
+        document.tankcontroller.corals.push(a);
+    }
     document.tool = this.prev_tool;
     return delete this;
+  };
+
+  BuyTool.prototype.hold = function(x, y) {
+    return true;
   };
 
   return BuyTool;

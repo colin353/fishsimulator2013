@@ -5,7 +5,7 @@ class Coral
 
 		@filename = filename
 		@coral_raw = sync_get 'game/assets/coral/'+filename
-
+		@type = 'coral';
 		if !@coral_raw.name?
 			alert "Illegal coral \"#{filename}\""
 

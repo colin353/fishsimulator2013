@@ -17,10 +17,10 @@ class BuyMenuController
 
 		@refresh() 
 
-		for a in @fishes
+		for a in @fishes.concat @corals
 			unique = md5(a.filename)
-			$("#buythis#{unique}").click ->
-				document.tool = new BuyTool(a,document.tool);
+			$("#buythis#{unique}").data('jsonfile',a.filename).data('type',a.type).click ->
+				document.tool = new BuyTool($(this).data('jsonfile'),$(this).data('type'),document.tool);
 
 	refresh: ->
 		html = "";
@@ -37,7 +37,7 @@ class BuyMenuController
 		$("#buy").html html
 
 	buymenu_mediaObject: (content) ->
-		retval = "<div class='span3'><div class='media'><a class='pull-left' id='buythis#{content.unique}' href='#'>
+		retval = "<div class='span3' style='height: 150px;'><div class='media'><a class='pull-left' id='buythis#{content.unique}' href='#'>
 				  <img class='media-object' style='width: 64px' src='game/images/#{content.image}'>
 				  </a><div class='media-body'><h4 class='media-heading'>#{content.title}</h4>
 				  	#{content.text}</div></div></div>"

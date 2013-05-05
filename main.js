@@ -23,12 +23,12 @@
         this.corals.push(new Coral(f));
       }
       this.refresh();
-      _ref = this.fishes;
+      _ref = this.fishes.concat(this.corals);
       for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
         a = _ref[_k];
         unique = md5(a.filename);
-        $("#buythis" + unique).click(function() {
-          return document.tool = new BuyTool(a, document.tool);
+        $("#buythis" + unique).data('jsonfile', a.filename).data('type', a.type).click(function() {
+          return document.tool = new BuyTool($(this).data('jsonfile'), $(this).data('type'), document.tool);
         });
       }
     }
@@ -57,7 +57,7 @@
     BuyMenuController.prototype.buymenu_mediaObject = function(content) {
       var retval;
 
-      retval = "<div class='span3'><div class='media'><a class='pull-left' id='buythis" + content.unique + "' href='#'>				  <img class='media-object' style='width: 64px' src='game/images/" + content.image + "'>				  </a><div class='media-body'><h4 class='media-heading'>" + content.title + "</h4>				  	" + content.text + "</div></div></div>";
+      retval = "<div class='span3' style='height: 150px;'><div class='media'><a class='pull-left' id='buythis" + content.unique + "' href='#'>				  <img class='media-object' style='width: 64px' src='game/images/" + content.image + "'>				  </a><div class='media-body'><h4 class='media-heading'>" + content.title + "</h4>				  	" + content.text + "</div></div></div>";
       return retval;
     };
 
@@ -78,6 +78,7 @@
     function Coral(filename) {
       this.filename = filename;
       this.coral_raw = sync_get('game/assets/coral/' + filename);
+      this.type = 'coral';
       if (this.coral_raw.name == null) {
         alert("Illegal coral \"" + filename + "\"");
       }
@@ -110,6 +111,7 @@
       if (this.fish_raw.name == null) {
         alert("Illegal fish \"" + filename + "\"");
       }
+      this.type = 'fish';
       this.image = this.fish_raw.image;
       this.price = this.fish_raw.price;
       this.name = this.fish_raw.name;
@@ -655,15 +657,38 @@
   })();
 
   BuyTool = (function() {
-    function BuyTool(purchased, previous_tool) {
+    function BuyTool(purchased, type, previous_tool) {
       this.purchased = purchased;
+      this.type = type;
       this.prev_tool = previous_tool;
     }
 
     BuyTool.prototype.click = function(x, y) {
-      document.tankcontroller.fishes.push(new Fish(this.purchased.filename));
+      var a;
+
+      switch (this.type) {
+        case 'fish':
+          a = new Fish(this.purchased);
+          a.position = {
+            x: x,
+            y: y
+          };
+          document.tankcontroller.fishes.push(a);
+          break;
+        case 'coral':
+          a = new Coral(this.purchased);
+          a.position = {
+            x: x - a.scale * document.viewcontroller.images[a.image].image.width * 0.5,
+            y: y - a.scale * document.viewcontroller.images[a.image].image.width * 0.5
+          };
+          document.tankcontroller.corals.push(a);
+      }
       document.tool = this.prev_tool;
       return delete this;
+    };
+
+    BuyTool.prototype.hold = function(x, y) {
+      return true;
     };
 
     return BuyTool;

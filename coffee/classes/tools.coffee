@@ -94,12 +94,28 @@ class HandTool
 			@grabbed.position.x = x - @grabbed.scale * 0.5 * document.viewcontroller.images[@grabbed.image].image.width;
 			@grabbed.position.y = y - @grabbed.scale * 0.5 * document.viewcontroller.images[@grabbed.image].image.height;	
 
-class BuyTool
-	constructor: (purchased, previous_tool) ->
-		@purchased = purchased;
+class BuyTool 
+	constructor: (purchased, type, previous_tool) ->
+		@purchased = purchased; # This is the JSON filename of the object.
+		@type = type # This is the purchased object's type, e.g. fish, coral, etc.
 		@prev_tool = previous_tool;
 
 	click: (x,y) ->
-		document.tankcontroller.fishes.push new Fish(@purchased.filename)
+		switch @type
+			when 'fish' 
+				a = new Fish(@purchased)
+				a.position = {x: x, y: y}
+				document.tankcontroller.fishes.push a
+			when 'coral' 
+				a = new Coral(@purchased)
+				a.position = {
+					x: x - a.scale*document.viewcontroller.images[a.image].image.width*0.5, 
+					y: y - a.scale*document.viewcontroller.images[a.image].image.width*0.5
+				}
+				document.tankcontroller.corals.push a
+
 		document.tool = @prev_tool;
 		delete @
+
+	hold: (x,y) ->
+		yes

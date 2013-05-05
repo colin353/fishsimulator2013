@@ -5,6 +5,7 @@ Coral = (function() {
   function Coral(filename) {
     this.filename = filename;
     this.coral_raw = sync_get('game/assets/coral/' + filename);
+    this.type = 'coral';
     if (this.coral_raw.name == null) {
       alert("Illegal coral \"" + filename + "\"");
     }
@@ -15,6 +16,8 @@ Coral = (function() {
       y: 0
     };
     this.scale = 0.2;
+    this.name = this.coral_raw.name;
+    this.description = this.coral_raw.description;
     if (this.coral_raw.scale != null) {
       this.scale = this.coral_raw.scale;
     }
