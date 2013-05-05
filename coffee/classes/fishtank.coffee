@@ -9,8 +9,8 @@ class FishTankCanvasController
 		@relinquishcontrol = no;
 
 		@fishes = [];
-		@fishes.push new Fish('clown-fish.png')
-		@fishes.push new Fish('minnow.png')
+		@fishes.push new Fish('clownfish.json')
+		@fishes.push new Fish('minnow.json')
 
 		@corals = [];
 		@corals.push new Coral('Coral1.png')

@@ -2,9 +2,16 @@
 var Fish;
 
 Fish = (function() {
-  function Fish(image) {
-    this.image = image;
-    viewcontroller.loadImages(image);
+  function Fish(filename) {
+    this.filename = filename;
+    this.fish_raw = sync_get('game/assets/' + filename);
+    if (this.fish_raw.name == null) {
+      alert("Illegal fish \"" + filename + "\"");
+    }
+    this.image = this.fish_raw.image;
+    this.price = this.fish_raw.price;
+    this.name = this.fish_raw.name;
+    viewcontroller.loadImages(this.image);
     this.position = {
       x: 0,
       y: 0
