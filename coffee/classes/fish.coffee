@@ -16,6 +16,10 @@ class Fish
 		@position.x += @direction.x * 10 #(Math.random() - 0.5)*10;
 		@position.y += @direction.y * 10#(Math.random() - 0.5)*10; 
 
+		if document.tank.temperature < 60 
+			@position.x += (Math.random() - 0.5)*10;
+			@position.y += (Math.random() - 0.5)*10;
+
 		if(@position.x > viewcontroller.canvas.width - 0.5*viewcontroller.images[@image].image.width || @position.x < 0) 
 			@direction.x = -@direction.x;
 			@direction.y = Math.random()-0.5;

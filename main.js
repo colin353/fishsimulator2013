@@ -42,6 +42,10 @@
       viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.5, flip);
       this.position.x += this.direction.x * 10;
       this.position.y += this.direction.y * 10;
+      if (document.tank.temperature < 60) {
+        this.position.x += (Math.random() - 0.5) * 10;
+        this.position.y += (Math.random() - 0.5) * 10;
+      }
       if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < 0) {
         this.direction.x = -this.direction.x;
         this.direction.y = Math.random() - 0.5;
