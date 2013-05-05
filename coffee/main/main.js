@@ -3,11 +3,9 @@ var tick, viewcontroller;
 
 viewcontroller = new ViewController;
 
-viewcontroller.loadImages('spritesheet.png', 'overlay.png', 'npc.png', 'minimenu_top.png', 'minimenu_bottom.png');
+viewcontroller.loadImages('TankBackground.jpg');
 
-viewcontroller.loadMap('lecturehall');
-
-viewcontroller.stack.push(new OverlayCanvasController('Hello, world!'));
+viewcontroller.stack.push(new FishTankCanvasController());
 
 document.viewcontroller = viewcontroller;
 

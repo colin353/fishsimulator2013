@@ -11,7 +11,7 @@ ViewController = (function() {
     }
     this.canvas = $("#" + selector).get(0);
     this.context = this.canvas.getContext('2d');
-    this.context.font = '30px "Pokemon GB"';
+    this.context.font = '45px "Courier"';
     if (isMobileSafari()) {
       this.context.font = '45px "Courier"';
     }
@@ -29,10 +29,6 @@ ViewController = (function() {
       e.preventDefault();
       return me.inputstack.push(new GInputEvent('K', e.keyCode, e.shiftKey));
     });
-    $('#dpad > div').bind('touchstart', this.canvasinput_Dpad_down);
-    $('#dpad > div').mousedown(this.canvasinput_Dpad_down);
-    $('#dpad > div').bind('touchend', this.canvasinput_Dpad_up);
-    $('#dpad > div').mouseup(this.canvasinput_Dpad_up);
   }
 
   ViewController.prototype.ready = function() {
@@ -62,13 +58,8 @@ ViewController = (function() {
     return true;
   };
 
-  ViewController.prototype.loadMap = function(location) {
-    this.map = new GMap(location);
-    return true;
-  };
-
-  ViewController.prototype.renderSprite = function(i, x, y) {
-    return this.context.drawImage(this.images['spritesheet.png'].image, 112 * (i % 16), Math.floor(i / 16) * 112, 112, 112, x * 75, y * 75, 75, 75);
+  ViewController.prototype.renderSprite = function(image, x, y) {
+    return this.context.drawImage(this.images[image].image, x, y);
   };
 
   ViewController.prototype.imageLoaded = function() {
@@ -79,32 +70,6 @@ ViewController = (function() {
     x = Math.floor(x - $(this.canvas).offset().left / 20);
     y = Math.floor(y - $(this.canvas).offset().left / 20);
     return this.inputstack.push(new GInputEvent('M', x, y));
-  };
-
-  ViewController.prototype.canvasinput_Dpad_down = function(e) {
-    var DEvent, direction;
-
-    direction = '';
-    switch (this.id) {
-      case 'dpad_u':
-        direction = 'U';
-        break;
-      case 'dpad_l':
-        direction = 'L';
-        break;
-      case 'dpad_r':
-        direction = 'R';
-        break;
-      case 'dpad_d':
-        direction = 'D';
-    }
-    DEvent = new GInputEvent('D', direction);
-    viewcontroller.inputstack.push(DEvent);
-    return viewcontroller.dpad_touchstate = DEvent;
-  };
-
-  ViewController.prototype.canvasinput_Dpad_up = function(e) {
-    return viewcontroller.dpad_touchstate = 0;
   };
 
   ViewController.prototype.tick = function() {

@@ -11,7 +11,7 @@ class GImage
 
 		@loaded = no 
 		@owner = owner;
-		
+ 		
 	onload: ->
 		@loaded = yes
 		#alert 'loaded one image...'
