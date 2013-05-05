@@ -9,12 +9,27 @@ Fish = (function() {
       x: 0,
       y: 0
     };
+    this.direction = {
+      x: Math.random(),
+      y: Math.random()
+    };
   }
 
   Fish.prototype.tick = function() {
-    viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.5);
-    this.position.x += (Math.random() - 0.5) * 10;
-    return this.position.y += (Math.random() - 0.5) * 10;
+    var flip;
+
+    flip = this.direction.x < 0;
+    viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.5, flip);
+    this.position.x += this.direction.x * 10;
+    this.position.y += this.direction.y * 10;
+    if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < 0) {
+      this.direction.x = -this.direction.x;
+      this.direction.y = Math.random() - 0.5;
+    }
+    if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height || this.position.y < 0) {
+      this.direction.y = -this.direction.y;
+      return this.direction.x = Math.random() - 0.5;
+    }
   };
 
   return Fish;

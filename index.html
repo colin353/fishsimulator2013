@@ -29,23 +29,36 @@ $(document).bind('touchmove', false);
       </div>
     </div>
 
+
 <div id=main>
 
-<canvas id="pokeCanvas" width="950" height="875" ></canvas>
+<canvas id="pokeCanvas" width="950" height="475" ></canvas>
+<div class=container>
+
+
+
+<div class="tab-content">
+  <div class="tab-pane active" id="home">
+  	<h3>Temperature</h3>
+  	<div class="progress progress-danger progress-striped">
+	  <div class="bar" id=tank_temperature style="width: 80%"></div>
+	</div>
+	<h3>Waste</h3>
+  	<div class="progress progress progress-striped">
+	  <div class="bar" id=tank_waste style="width: 80%"></div>
+	</div>
+	<h3>Salt</h3>
+  	<div class="progress progress progress-striped">
+	  <div class="bar" id=tank_salt style="width: 80%"></div>
+	</div>
+	<h3>Supply</h3>
+  	<div class="progress progress progress-striped">
+	  <div class="bar" id=tank_supply style="width: 80%"></div>
+	</div>
+
+  </div>
 </div>
 
-<div class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body…</p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" class="btn">Close</a>
-    <a href="#" class="btn btn-primary">Save changes</a>
-  </div>
 </div>
 
 

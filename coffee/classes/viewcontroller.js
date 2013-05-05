@@ -58,15 +58,26 @@ ViewController = (function() {
     return true;
   };
 
-  ViewController.prototype.renderSprite = function(image, x, y, scale) {
+  ViewController.prototype.renderSprite = function(image, x, y, scale, flip) {
     var height, width;
 
     if (scale == null) {
       scale = 1;
     }
+    if (flip == null) {
+      flip = false;
+    }
     width = this.images[image].image.width;
     height = this.images[image].image.height;
-    return this.context.drawImage(this.images[image].image, x, y, width * scale, height * scale);
+    this.context.save();
+    if (flip === true) {
+      this.context.translate(this.canvas.width / 2, 0);
+      this.context.scale(-1, 1);
+      this.context.translate(-this.canvas.width / 2, 0);
+      x = this.canvas.width - x - width * scale;
+    }
+    this.context.drawImage(this.images[image].image, x, y, width * scale, height * scale);
+    return this.context.restore();
   };
 
   ViewController.prototype.imageLoaded = function() {

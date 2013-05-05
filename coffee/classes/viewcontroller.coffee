@@ -46,10 +46,17 @@ class ViewController
 		return yes
 
 
-	renderSprite: (image,x,y,scale=1) ->
+	renderSprite: (image,x,y,scale=1, flip=no) ->
 		width = @images[image].image.width
 		height = @images[image].image.height
+		@context.save()
+		if(flip == yes)
+			@context.translate(@canvas.width/2,0);
+			@context.scale(-1, 1)
+			@context.translate(-@canvas.width/2,0)
+			x = @canvas.width - x - width*scale
 		@context.drawImage(@images[image].image,x,y,width*scale,height*scale) 
+		@context.restore()
 
 	imageLoaded: ->
 		return yes

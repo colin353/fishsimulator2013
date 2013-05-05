@@ -4,8 +4,6 @@ var FishTankCanvasController;
 FishTankCanvasController = (function() {
   function FishTankCanvasController() {
     this.relinquishcontrol = false;
-    this.readytofinish = false;
-    this.count = 0;
     this.fishes = [];
     this.fishes.push(new Fish('clown-fish.png'));
     this.fishes.push(new Fish('minnow.png'));
@@ -15,12 +13,14 @@ FishTankCanvasController = (function() {
       x: 200,
       y: 200
     };
+    this.tank = new Tank('TankBackground.jpg');
+    document.tank = this.tank;
   }
 
   FishTankCanvasController.prototype.tick = function() {
     var a, _i, _j, _len, _len1, _ref, _ref1;
 
-    viewcontroller.renderSprite('TankBackground.jpg', 0, 0);
+    this.tank.tick();
     _ref = this.corals;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       a = _ref[_i];
