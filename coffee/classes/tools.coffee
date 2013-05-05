@@ -68,7 +68,7 @@ class SaltTool
 	hold:(x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
 		if document.tank.salt < 100
-			document.tank.salt += 0.2;
+			document.tank.salt += 1;
 
 class HandTool
 	constructor: (image) ->

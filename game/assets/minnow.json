@@ -1,5 +1,9 @@
 {
 	"name" : "Minnow",
 	"price" : 20,
-	"image" : "minnow.png"
+	"image" : "minnow.png",
+	"salt_max" : 30,
+	"salt_min" : 0
+	
+	
 }

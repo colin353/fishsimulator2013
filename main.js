@@ -42,16 +42,31 @@
       };
     }
 
+    Fish.prototype.salt_ok = function() {
+      if (document.tank.salt > this.fish_raw.salt_max || document.tank.salt < this.fish_raw.salt_min) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+
     Fish.prototype.tick = function() {
       var flip;
 
       flip = this.direction.x < 0;
       viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.5, flip);
-      this.position.x += this.direction.x * 10;
-      this.position.y += this.direction.y * 10;
+      if (this.salt_ok() === true) {
+        this.position.x += this.direction.x * 10;
+        this.position.y += this.direction.y * 10;
+      }
       if (document.tank.temperature < 60) {
         this.position.x += (Math.random() - 0.5) * 10;
         this.position.y += (Math.random() - 0.5) * 10;
+      }
+      if (this.salt_ok() === false) {
+        if (this.position.y < viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50) {
+          this.position.y += 0.5;
+        }
       }
       if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < 0) {
         this.direction.x = -this.direction.x;
@@ -459,7 +474,7 @@
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
       if (document.tank.salt < 100) {
-        return document.tank.salt += 0.2;
+        return document.tank.salt += 1;
       }
     };
 

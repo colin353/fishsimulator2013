@@ -1,5 +1,8 @@
 {
 	"name" : "Clown Fish",
 	"price" : 100,
-	"image" : "clown-fish.png"
+	"image" : "clown-fish.png",
+	"salt_max" : 60,
+	"salt_min" : 25
+
 }
