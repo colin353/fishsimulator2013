@@ -35,7 +35,6 @@ body, #main {
 canvas#pokeCanvas {
 	border-radius: 5px;
 	margin-left: auto;
-	padding-top: 100px;
 	margin-right: auto;
 	display:block;
 }

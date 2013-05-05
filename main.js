@@ -74,7 +74,7 @@
     }
 
     FishTankCanvasController.prototype.tick = function() {
-      var a, _i, _j, _len, _len1, _ref, _ref1;
+      var a, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
 
       this.tank.tick();
       _ref = this.corals;
@@ -86,6 +86,13 @@
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         a = _ref1[_j];
         a.tick();
+      }
+      _ref2 = viewcontroller.inputstack;
+      for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+        a = _ref2[_k];
+        if (a.type === 'M') {
+          document.tool.click(a.x, a.y);
+        }
       }
       return true;
     };
@@ -330,6 +337,9 @@
         e.preventDefault();
         return me.inputstack.push(new GInputEvent('K', e.keyCode, e.shiftKey));
       });
+      $("#spongetool").click(function() {
+        return document.tool = document.tools['sponge'];
+      });
     }
 
     ViewController.prototype.ready = function() {
@@ -386,8 +396,8 @@
     };
 
     ViewController.prototype.canvasinput_mouseClick = function(x, y) {
-      x = Math.floor(x - $(this.canvas).offset().left / 20);
-      y = Math.floor(y - $(this.canvas).offset().left / 20);
+      x = Math.floor(x - $(this.canvas).offset().left);
+      y = Math.floor(y - $(this.canvas).offset().top);
       return this.inputstack.push(new GInputEvent('M', x, y));
     };
 
@@ -396,6 +406,7 @@
         return alert("Not ready yet...");
       }
       this.stack[0].tick();
+      this.inputstack = [];
       return true;
     };
 
@@ -410,6 +421,12 @@
   viewcontroller.stack.push(new FishTankCanvasController());
 
   document.viewcontroller = viewcontroller;
+
+  $(function() {
+    document.tools = [];
+    document.tools['sponge'] = new SpongeTool('sponge3.png');
+    return document.tool = document.tools['sponge'];
+  });
 
   tick = function() {
     viewcontroller.tick();
@@ -444,21 +461,21 @@
   SpongeTool = (function() {
     function SpongeTool(image) {
       this.image = image;
-      if (image != null) {
-        viewcontroller.loadImages(image);
+      this.scale = 0.6;
+      if (this.image != null) {
+        viewcontroller.loadImages(this.image);
       }
-      $();
     }
 
-    SpongeTool.prototype.click = function() {
-      return true;
+    SpongeTool.prototype.click = function(x, y) {
+      return this.hold(x, y);
     };
 
-    SpongeTool.prototype.hold = function() {
-      if (typeof image !== "undefined" && image !== null) {
-        viewcontroller.renderSprite(this.image, 0, 0, 1.2);
+    SpongeTool.prototype.hold = function(x, y) {
+      if (this.image != null) {
+        viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
-      return document.tank.waste -= 0.2;
+      return document.tank.waste -= 2;
     };
 
     return SpongeTool;

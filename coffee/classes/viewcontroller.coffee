@@ -4,6 +4,7 @@
 #= require helpers.coffee
 #= require inputevent.coffee
 #= require fisntank.coffee
+#= require tools.coffee
 
 #  The view controller is an abstraction for the canvas, and drawing is done through it. It also manages 
 #  asset loading, e.g. images.
@@ -32,6 +33,9 @@ class ViewController
 		$(document).keypress (e) ->
 			e.preventDefault()
 			me.inputstack.push(new GInputEvent('K',e.keyCode,e.shiftKey));
+
+		$("#spongetool").click ->
+			document.tool = document.tools['sponge']
 
 
 	ready: ->
@@ -62,8 +66,9 @@ class ViewController
 		return yes
 
 	canvasinput_mouseClick: (x,y) ->
-		x = Math.floor(x-$(@.canvas).offset().left / 20)
-		y = Math.floor(y-$(@.canvas).offset().left / 20)
+		x = Math.floor(x-$(@.canvas).offset().left)
+		y = Math.floor(y-$(@.canvas).offset().top)
+		#alert "#{x}, #{y}" 
 		@inputstack.push new GInputEvent('M',x,y)
 
 	tick: ->
@@ -73,5 +78,7 @@ class ViewController
 		return alert "Not ready yet..." if !@ready()
 
 		@stack[0].tick()
+
+		@inputstack = [];
 
 		return yes;

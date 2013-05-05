@@ -9,6 +9,12 @@ viewcontroller.stack.push(new FishTankCanvasController());
 
 document.viewcontroller = viewcontroller;
 
+$(function() {
+  document.tools = [];
+  document.tools['sponge'] = new SpongeTool('sponge3.png');
+  return document.tool = document.tools['sponge'];
+});
+
 tick = function() {
   viewcontroller.tick();
   return setTimeout(tick, viewcontroller.timestep);

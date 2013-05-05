@@ -29,6 +29,9 @@ ViewController = (function() {
       e.preventDefault();
       return me.inputstack.push(new GInputEvent('K', e.keyCode, e.shiftKey));
     });
+    $("#spongetool").click(function() {
+      return document.tool = document.tools['sponge'];
+    });
   }
 
   ViewController.prototype.ready = function() {
@@ -85,8 +88,8 @@ ViewController = (function() {
   };
 
   ViewController.prototype.canvasinput_mouseClick = function(x, y) {
-    x = Math.floor(x - $(this.canvas).offset().left / 20);
-    y = Math.floor(y - $(this.canvas).offset().left / 20);
+    x = Math.floor(x - $(this.canvas).offset().left);
+    y = Math.floor(y - $(this.canvas).offset().top);
     return this.inputstack.push(new GInputEvent('M', x, y));
   };
 
@@ -95,6 +98,7 @@ ViewController = (function() {
       return alert("Not ready yet...");
     }
     this.stack[0].tick();
+    this.inputstack = [];
     return true;
   };
 

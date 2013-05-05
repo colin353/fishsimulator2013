@@ -27,21 +27,21 @@ WarmTool = (function() {
 SpongeTool = (function() {
   function SpongeTool(image) {
     this.image = image;
-    if (image != null) {
-      viewcontroller.loadImages(image);
+    this.scale = 0.6;
+    if (this.image != null) {
+      viewcontroller.loadImages(this.image);
     }
-    $();
   }
 
-  SpongeTool.prototype.click = function() {
-    return true;
+  SpongeTool.prototype.click = function(x, y) {
+    return this.hold(x, y);
   };
 
-  SpongeTool.prototype.hold = function() {
-    if (typeof image !== "undefined" && image !== null) {
-      viewcontroller.renderSprite(this.image, 0, 0, 1.2);
+  SpongeTool.prototype.hold = function(x, y) {
+    if (this.image != null) {
+      viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
     }
-    return document.tank.waste -= 0.2;
+    return document.tank.waste -= 2;
   };
 
   return SpongeTool;

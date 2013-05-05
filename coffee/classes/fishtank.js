@@ -18,7 +18,7 @@ FishTankCanvasController = (function() {
   }
 
   FishTankCanvasController.prototype.tick = function() {
-    var a, _i, _j, _len, _len1, _ref, _ref1;
+    var a, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
 
     this.tank.tick();
     _ref = this.corals;
@@ -30,6 +30,13 @@ FishTankCanvasController = (function() {
     for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
       a = _ref1[_j];
       a.tick();
+    }
+    _ref2 = viewcontroller.inputstack;
+    for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
+      a = _ref2[_k];
+      if (a.type === 'M') {
+        document.tool.click(a.x, a.y);
+      }
     }
     return true;
   };

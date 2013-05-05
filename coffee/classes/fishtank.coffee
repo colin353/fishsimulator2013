@@ -1,5 +1,6 @@
 #= require fish.coffee
 #= require coral.coffee
+#= require tools.coffee
 
 # The Overlay 
 
@@ -25,5 +26,9 @@ class FishTankCanvasController
 		@tank.tick()
 		a.tick() for a in @corals
 		a.tick() for a in @fishes
+
+		for a in viewcontroller.inputstack
+			if a.type == 'M'
+				document.tool.click(a.x,a.y);
 		
 		yes
