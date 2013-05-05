@@ -14,7 +14,7 @@ class FishTankCanvasController
 		@fishes.push new Fish('minnow.json')
 
 		@corals = [];
-		@corals.push new Coral('Coral1.png')
+		@corals.push new Coral('coral.json')
 		@corals[0].position = {x: 200, y:200}
 
 		@tank = new Tank('TankBackground.jpg')

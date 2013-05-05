@@ -4,9 +4,14 @@
     __slice = [].slice;
 
   Coral = (function() {
-    function Coral(image) {
-      this.image = image;
-      viewcontroller.loadImages(image);
+    function Coral(filename) {
+      this.filename = filename;
+      this.coral_raw = sync_get('game/assets/coral/' + filename);
+      if (this.coral_raw.name == null) {
+        alert("Illegal coral \"" + filename + "\"");
+      }
+      this.image = this.coral_raw.image;
+      viewcontroller.loadImages(this.image);
       this.position = {
         x: 0,
         y: 0
@@ -106,7 +111,7 @@
       this.fishes.push(new Fish('clownfish.json'));
       this.fishes.push(new Fish('minnow.json'));
       this.corals = [];
-      this.corals.push(new Coral('Coral1.png'));
+      this.corals.push(new Coral('coral.json'));
       this.corals[0].position = {
         x: 200,
         y: 200

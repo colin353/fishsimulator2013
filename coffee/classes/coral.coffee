@@ -1,9 +1,18 @@
 # The coral object.
 
 class Coral
-	constructor: (image) ->
-		@image = image;  
-		viewcontroller.loadImages image;
+	constructor: (filename) ->
+
+		@filename = filename
+		@coral_raw = sync_get 'game/assets/coral/'+filename
+
+		if !@coral_raw.name?
+			alert "Illegal coral \"#{filename}\""
+
+		@image = @coral_raw.image;  
+
+		viewcontroller.loadImages @image;
+		
 		@position = {x: 0, y: 0};
 		@scale = 0.2;
 

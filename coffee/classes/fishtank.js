@@ -8,13 +8,14 @@ FishTankCanvasController = (function() {
     this.fishes.push(new Fish('clownfish.json'));
     this.fishes.push(new Fish('minnow.json'));
     this.corals = [];
-    this.corals.push(new Coral('Coral1.png'));
+    this.corals.push(new Coral('coral.json'));
     this.corals[0].position = {
       x: 200,
       y: 200
     };
     this.tank = new Tank('TankBackground.jpg');
     document.tank = this.tank;
+    document.tankcontroller = this;
   }
 
   FishTankCanvasController.prototype.tick = function() {

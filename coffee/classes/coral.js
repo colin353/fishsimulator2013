@@ -2,17 +2,23 @@
 var Coral;
 
 Coral = (function() {
-  function Coral(image) {
-    this.image = image;
-    viewcontroller.loadImages(image);
+  function Coral(filename) {
+    this.filename = filename;
+    this.coral_raw = sync_get('game/assets/coral/' + filename);
+    if (this.coral_raw.name == null) {
+      alert("Illegal coral \"" + filename + "\"");
+    }
+    this.image = this.coral_raw.image;
+    viewcontroller.loadImages(this.image);
     this.position = {
       x: 0,
       y: 0
     };
+    this.scale = 0.2;
   }
 
   Coral.prototype.tick = function() {
-    return viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.2);
+    return viewcontroller.renderSprite(this.image, this.position.x, this.position.y, this.scale);
   };
 
   return Coral;
