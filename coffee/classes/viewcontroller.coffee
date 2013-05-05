@@ -47,6 +47,16 @@ class ViewController
 
 		$("#spongetool").click ->
 			document.tool = document.tools['sponge']
+		$("#warmtool").click ->
+			document.tool = document.tools['warm']
+		$("#cooltool").click ->
+			document.tool = document.tools['cool']
+		$("#foodtool").click ->
+			document.tool = document.tools['feed']
+		$("#handtool").click ->
+			document.tool = document.tools['hand']
+		$("#salttool").click ->
+			document.tool = document.tools['salt']
 
 
 	ready: ->

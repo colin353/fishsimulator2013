@@ -5,12 +5,13 @@ class WarmTool
 		@image = image;  
 		viewcontroller.loadImages @image if @image?
 		@scale = 1;
-	click: ->
+	click: (x,y) ->
 		yes
 
-	hold: ->
+	hold: (x,y)->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
-		document.tank.temperature += 0.2;
+		if document.tank.temperature < 90
+			document.tank.temperature += 0.2;
 
 
 class SpongeTool
@@ -24,7 +25,8 @@ class SpongeTool
 
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
-		document.tank.waste -= 2;
+		if document.tank.waste > 0
+			document.tank.waste -=2;
 
 class FeedTool
 	constructor: (image) ->
@@ -37,7 +39,7 @@ class FeedTool
 
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
-		document.tank.waste -= 2;
+
 
 class CoolTool
 	constructor: (image) ->
@@ -45,9 +47,37 @@ class CoolTool
 		viewcontroller.loadImages image if image?
 		@scale = 1;
 
-	click: ->
+	click: (x,y) ->
 		yes
 
-	hold: ->
+	hold:(x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
-		document.tank.temperature -= 0.2;
+		if document.tank.temperature > 45 
+			document.tank.temperature -= 0.2;
+
+
+class SaltTool
+	constructor: (image) ->
+		@image = image;  
+		viewcontroller.loadImages image if image?
+		@scale = 0.5;
+
+	click: (x,y) ->
+		yes
+
+	hold:(x,y) ->
+		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
+		if document.tank.salt < 100
+			document.tank.salt += 0.2;
+
+class HandTool
+	constructor: (image) ->
+		@image = image;  
+		viewcontroller.loadImages image if image?
+		@scale = 0.4;
+
+	click: (x,y) ->
+		yes
+
+	hold:(x,y) ->
+		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
