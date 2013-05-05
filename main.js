@@ -140,9 +140,54 @@
       }
     };
 
-    Fish.prototype.tick = function() {
-      var flip, reverse;
+    Fish.prototype.nearest_pellet = function() {
+      var bestdistance, bestpos, distance, i, p, xs, ys, _i, _len, _ref;
 
+      bestdistance = 200;
+      bestpos = {
+        x: -1,
+        y: -1
+      };
+      i = 0;
+      _ref = document.tankcontroller.pellets;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        p = _ref[_i];
+        xs = p.position.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2);
+        xs = xs * xs;
+        ys = p.position.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2);
+        ys = ys * ys;
+        distance = Math.sqrt(xs + ys);
+        if (distance < bestdistance) {
+          bestdistance = distance;
+          bestpos = {
+            x: p.position.x,
+            y: p.position.y
+          };
+          bestpos.pellet = i;
+        }
+        i++;
+      }
+      bestpos.distance = bestdistance;
+      return bestpos;
+    };
+
+    Fish.prototype.tick = function() {
+      var closest, flip, norm, reverse;
+
+      closest = this.nearest_pellet();
+      if (closest.x > -1) {
+        this.direction.x = (closest.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2)) * 0.005;
+        this.direction.y = (closest.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2)) * 0.005;
+        norm = Math.sqrt(this.direction.x ^ 2 + this.direction.y ^ 2);
+        if (norm < .2) {
+          norm = .2;
+        }
+        this.direction.x = this.direction.x / norm;
+        this.direction.y = this.direction.y / norm;
+        if (closest.distance < 30) {
+          document.tankcontroller.pellets.splice(closest.pellet, 1);
+        }
+      }
       flip = this.direction.x < 0;
       viewcontroller.renderSprite(this.image, this.position.x, this.position.y, this.scale, flip);
       if (this.salt_ok() === true) {
@@ -582,8 +627,15 @@
     }
 
     FeedTool.prototype.click = function(x, y) {
+      var p;
+
       this.hold(x, y);
-      return document.tankcontroller.pellets.push(new Pellet('pellet.json'));
+      p = new Pellet('pellet.json');
+      p.position = {
+        x: x,
+        y: y
+      };
+      return document.tankcontroller.pellets.push(p);
     };
 
     FeedTool.prototype.hold = function(x, y) {

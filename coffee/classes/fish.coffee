@@ -26,8 +26,42 @@ class Fish
 		else 
 			return yes
 
+	nearest_pellet: ->
+		bestdistance = 200;
+		bestpos = {x: -1, y: -1}
+		i = 0;
+		for p in document.tankcontroller.pellets
+			xs =  p.position.x - (@position.x + @scale*document.viewcontroller.images[@image].image.width/2);
+			xs = xs * xs
+			ys = p.position.y - (@position.y + @scale*document.viewcontroller.images[@image].image.height/2);
+			ys = ys * ys
+			distance = Math.sqrt( xs + ys )
+			if distance < bestdistance
+				bestdistance = distance
+				bestpos  = { x: p.position.x, y: p.position.y }
+				bestpos.pellet = i;
+			i++;
+		bestpos.distance = bestdistance;
+
+		return bestpos;
+
+
 	tick: ->
 		
+		closest = @nearest_pellet()
+		if closest.x > -1
+			#alert closest.x
+			@direction.x = (closest.x - (@position.x + @scale*document.viewcontroller.images[@image].image.width/2)) * 0.005
+			@direction.y = (closest.y - (@position.y + @scale*document.viewcontroller.images[@image].image.height/2)) * 0.005 
+			norm = Math.sqrt( @direction.x ^2 + @direction.y ^2 );
+			if norm < .2 
+				norm = .2;
+			@direction.x = @direction.x / norm;
+			@direction.y = @direction.y / norm;
+			if closest.distance < 30
+				document.tankcontroller.pellets.splice closest.pellet, 1;
+				#alert "I ate pellet #{closest.pellet}"
+
 		# First thing is to render the background image
 		flip = @direction.x < 0;
 		viewcontroller.renderSprite(@image,@position.x,@position.y,@scale,flip)
@@ -57,3 +91,4 @@ class Fish
 		if @crustacean == 1
 			@position.y = viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 120
 		document.tank.waste += 0.02; 
+

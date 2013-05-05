@@ -36,8 +36,9 @@ class FeedTool
 
 	click: (x,y) ->
 		@hold(x,y)
-		
-		document.tankcontroller.pellets.push new Pellet('pellet.json')
+		p = new Pellet('pellet.json')
+		p.position = { x: x, y: y }
+		document.tankcontroller.pellets.push p
 
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
