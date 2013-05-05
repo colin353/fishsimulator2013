@@ -1,9 +1,10 @@
 {
 	"name" : "Hermit Crab",
-	"price" : 1000000,
+	"price" : 200,
 	"image" : "hermitcrabsmall.png",
 	"salt_max" : 60,
 	"salt_min" : 0,
 	"scale" : 1,
-	"crustacean" : 1
+	"crustacean" : 1,
+	"Description" : "A small crustacean who will clean up algae from your tank."
 }
