@@ -1,14 +1,15 @@
 #= require fish.coffee
 #= require coral.coffee
 #= require tools.coffee
-
+#= require pellet.coffee
 # The Overlay 
 
 class FishTankCanvasController
 	constructor: ->
 			
 		@relinquishcontrol = no;
-
+		@pellets = [];
+		@pellets.push new Pellet('pellet.json')
 		@fishes = [];
 		@fishes.push new Fish('clownfish.json')
 		@fishes.push new Fish('minnow.json')
@@ -33,7 +34,7 @@ class FishTankCanvasController
 		@tank.tick()
 		a.tick() for a in @corals
 		a.tick() for a in @fishes
-
+		a.tick() for a in @pellets
 		for a in viewcontroller.inputstack
 			if a.type == 'M'
 				document.tool.click(a.x,a.y)
