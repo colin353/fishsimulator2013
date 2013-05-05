@@ -39,17 +39,14 @@ class Fish
 		if @salt_ok() == no
 			if(@position.y < viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50) 
 				@position.y += 0.5;
-			
-
-				
 
 
 		if(@position.x > viewcontroller.canvas.width - 0.5*viewcontroller.images[@image].image.width || @position.x < 0) 
-			@direction.x = -@direction.x;
-			@direction.y = Math.random()-0.5;
+			@direction.x = Math.abs(@direction.x) * if @position.x > 0 then 1 else -1;
+			@direction.y = Math.random()-0.5 if @salt_ok()
 
 		if(@position.y > viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50|| @position.y < 0) 
-			@direction.y = -@direction.y;
-			@direction.x = Math.random()-0.5;
+			@direction.y = Math.abs(@direction.y) * if @position.y > 0 then 1 else -1;
+			@direction.x = Math.random()-0.5 if @salt_ok()
 
 		document.tank.waste += 0.02; 
