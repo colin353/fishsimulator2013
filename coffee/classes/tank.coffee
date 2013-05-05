@@ -11,7 +11,7 @@ class Tank
 		viewcontroller.loadImages image;
 
 	tick: ->
-		viewcontroller.renderSprite('TankBackground.jpg',0,0,1.2)
+		viewcontroller.renderSprite(@image,0,0,1.2)
 
 		# Render all stats
 		$("#tank_supply").css('width',@supply+'%');

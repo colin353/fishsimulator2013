@@ -24,8 +24,6 @@ class FishTankCanvasController
 		
 		@tank.tick()
 		a.tick() for a in @corals
-		a.tick() for a in @fishes 
-
-
+		a.tick() for a in @fishes
 		
 		yes

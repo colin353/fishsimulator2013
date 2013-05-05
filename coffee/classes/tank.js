@@ -12,7 +12,7 @@ Tank = (function() {
   }
 
   Tank.prototype.tick = function() {
-    viewcontroller.renderSprite('TankBackground.jpg', 0, 0, 1.2);
+    viewcontroller.renderSprite(this.image, 0, 0, 1.2);
     $("#tank_supply").css('width', this.supply + '%');
     $("#tank_salt").css('width', this.salt + '%');
     $("#tank_waste").css('width', this.waste + '%');
