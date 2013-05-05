@@ -63,7 +63,8 @@ FeedTool = (function() {
   }
 
   FeedTool.prototype.click = function(x, y) {
-    return this.hold(x, y);
+    this.hold(x, y);
+    return document.tankcontroller.pellets.push(new Pellet('pellet.json'));
   };
 
   FeedTool.prototype.hold = function(x, y) {
