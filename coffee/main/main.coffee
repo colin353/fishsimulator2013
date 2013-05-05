@@ -15,6 +15,8 @@ $ ->
 	document.tools['hand'] = new HandTool('hand.png')
 	document.tool = document.tools['hand'];
 
+	document.buymenu = new BuyMenuController();
+
 tick = ->
 	viewcontroller.tick()
 
