@@ -2,13 +2,16 @@ viewcontroller = new ViewController
 viewcontroller.loadImages 'TankBackground.jpg' 
 
 viewcontroller.stack.push(new FishTankCanvasController())
-
+ 
 document.viewcontroller = viewcontroller;
 
 $ -> 
 	document.tools = [];
 	document.tools['sponge'] = new SpongeTool('sponge3.png')
-	document.tool = document.tools['sponge'];
+	document.tools['feed'] = new FeedTool('FishFood.png')
+	document.tools['warm'] = new WarmTool('heattool.png')
+	document.tools['cool'] = new CoolTool('icecube.png')
+	document.tool = document.tools['warm'];
 
 tick = ->
 	viewcontroller.tick()
