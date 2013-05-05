@@ -8,15 +8,26 @@ FishTankCanvasController = (function() {
     this.count = 0;
     this.fishes = [];
     this.fishes.push(new Fish('clown-fish.png'));
+    this.corals = [];
+    this.corals.push(new Coral('Coral1.png'));
+    this.corals[0].position = {
+      x: 200,
+      y: 200
+    };
   }
 
   FishTankCanvasController.prototype.tick = function() {
-    var a, _i, _len, _ref;
+    var a, _i, _j, _len, _len1, _ref, _ref1;
 
     viewcontroller.renderSprite('TankBackground.jpg', 0, 0);
-    _ref = this.fishes;
+    _ref = this.corals;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       a = _ref[_i];
+      a.tick();
+    }
+    _ref1 = this.fishes;
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      a = _ref1[_j];
       a.tick();
     }
     return true;

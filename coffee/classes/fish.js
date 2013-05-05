@@ -12,7 +12,7 @@ Fish = (function() {
   }
 
   Fish.prototype.tick = function() {
-    viewcontroller.renderSprite(this.image, this.position.x, this.position.y);
+    viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.5);
     this.position.x += (Math.random() - 0.5) * 10;
     return this.position.y += (Math.random() - 0.5) * 10;
   };

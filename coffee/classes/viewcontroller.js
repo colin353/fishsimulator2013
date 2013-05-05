@@ -58,8 +58,15 @@ ViewController = (function() {
     return true;
   };
 
-  ViewController.prototype.renderSprite = function(image, x, y) {
-    return this.context.drawImage(this.images[image].image, x, y);
+  ViewController.prototype.renderSprite = function(image, x, y, scale) {
+    var height, width;
+
+    if (scale == null) {
+      scale = 1;
+    }
+    width = this.images[image].image.width;
+    height = this.images[image].image.height;
+    return this.context.drawImage(this.images[image].image, x, y, width * scale, height * scale);
   };
 
   ViewController.prototype.imageLoaded = function() {

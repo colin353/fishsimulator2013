@@ -1,14 +1,6 @@
-@font-face
-{
-	font-family: "Pokemon GB";
-	font-weight: normal;
-	font-style: normal;
-	src: 	url("Pokemon GB.woff") format('woff'),
-		url("Pokemon GB.otf") format('opentype');
-}
 
 * {
-	font-family: "Pokemon GB";
+	font-family: "Arial";
 	font-size: 48pt;
 	-webkit-user-select: none;
 }

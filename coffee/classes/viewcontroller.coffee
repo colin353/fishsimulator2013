@@ -46,8 +46,10 @@ class ViewController
 		return yes
 
 
-	renderSprite: (image,x,y) ->
-		@context.drawImage(@images[image].image,x,y)
+	renderSprite: (image,x,y,scale=1) ->
+		width = @images[image].image.width
+		height = @images[image].image.height
+		@context.drawImage(@images[image].image,x,y,width*scale,height*scale) 
 
 	imageLoaded: ->
 		return yes
