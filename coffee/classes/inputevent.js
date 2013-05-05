@@ -14,6 +14,7 @@ GInputEvent = (function() {
         this.shift = data[1];
         break;
       case 'M':
+      case 'MD':
         this.x = data[0];
         this.y = data[1];
         break;

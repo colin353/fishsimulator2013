@@ -13,6 +13,6 @@ $ ->
 tick = ->
 	viewcontroller.tick()
 
-	setTimeout tick, viewcontroller.timestep
+	setTimeout tick, viewcontroller.timestep 
 
 tick()

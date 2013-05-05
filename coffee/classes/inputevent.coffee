@@ -8,7 +8,7 @@ class GInputEvent
  			when 'K'
  				@key = data[0]
  				@shift = data[1];
- 			when 'M' 
+ 			when 'M', 'MD'
  				@x = data[0];
  				@y = data[1];
  			when 'D' then @dir = data[0]
