@@ -323,11 +323,11 @@
       this.scale = 1;
     }
 
-    WarmTool.prototype.click = function() {
+    WarmTool.prototype.click = function(x, y) {
       return true;
     };
 
-    WarmTool.prototype.hold = function() {
+    WarmTool.prototype.hold = function(x, y) {
       if (this.image != null) {
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
@@ -355,7 +355,9 @@
       if (this.image != null) {
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
-      return document.tank.waste -= 2;
+      if (document.tank.waste > 0) {
+        return document.tank.waste -= 2;
+      }
     };
 
     return SpongeTool;
@@ -395,11 +397,11 @@
       this.scale = 1;
     }
 
-    CoolTool.prototype.click = function() {
+    CoolTool.prototype.click = function(x, y) {
       return true;
     };
 
-    CoolTool.prototype.hold = function() {
+    CoolTool.prototype.hold = function(x, y) {
       if (this.image != null) {
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
@@ -454,6 +456,15 @@
       });
       $("#spongetool").click(function() {
         return document.tool = document.tools['sponge'];
+      });
+      $("#warmtool").click(function() {
+        return document.tool = document.tools['warm'];
+      });
+      $("#cooltool").click(function() {
+        return document.tool = document.tools['cool'];
+      });
+      $("#foodtool").click(function() {
+        return document.tool = document.tools['feed'];
       });
     }
 
@@ -552,7 +563,7 @@
     document.tools['feed'] = new FeedTool('FishFood.png');
     document.tools['warm'] = new WarmTool('heattool.png');
     document.tools['cool'] = new CoolTool('icecube.png');
-    return document.tool = document.tools['warm'];
+    return document.tool = document.tools['sponge'];
   });
 
   tick = function() {
