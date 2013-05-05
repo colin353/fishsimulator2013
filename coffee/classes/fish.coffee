@@ -12,6 +12,8 @@ class Fish
 		@image = @fish_raw.image
 		@price = @fish_raw.price
 		@name = @fish_raw.name
+
+		@scale = 0.5;
 	
 		viewcontroller.loadImages @image;
 		@position = {x: 0, y: 0};
@@ -27,7 +29,7 @@ class Fish
 		
 		# First thing is to render the background image
 		flip = @direction.x < 0;
-		viewcontroller.renderSprite(@image,@position.x,@position.y,0.5,flip)
+		viewcontroller.renderSprite(@image,@position.x,@position.y,@scale,flip)
 		if @salt_ok() == yes
 			@position.x += @direction.x * 10 #(Math.random() - 0.5)*10;
 			@position.y += @direction.y * 10#(Math.random() - 0.5)*10; 

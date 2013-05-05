@@ -79,16 +79,14 @@ class HandTool
 
 	click: (x,y) ->
 		@grabbed = null;
-		for i in [0...document.tankcontroller.fishes.length]
-			document.tankcontroller.fishes[i].scale = 0.5
-			xs = document.tankcontroller.fishes[i].position.x - x + document.tankcontroller.fishes[i].scale * 0.5 * document.viewcontroller.images[document.tankcontroller.fishes[i].image].image.width
+		for thisfish in document.tankcontroller.fishes.concat document.tankcontroller.corals
+			xs = thisfish.position.x - x + thisfish.scale * 0.5 * document.viewcontroller.images[thisfish.image].image.width
 			xs = xs * xs
-			ys = document.tankcontroller.fishes[i].position.y - y + document.tankcontroller.fishes[i].scale * 0.5 * document.viewcontroller.images[document.tankcontroller.fishes[i].image].image.height
+			ys = thisfish.position.y - y + thisfish.scale * 0.5 * document.viewcontroller.images[thisfish.image].image.height
 			ys = ys * ys
 			distance = Math.sqrt( xs + ys )
 			if distance < 50
-				@grabbed = document.tankcontroller.fishes[i]
-		yes
+				@grabbed = thisfish
 
 	hold:(x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?

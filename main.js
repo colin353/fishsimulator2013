@@ -11,10 +11,11 @@
         x: 0,
         y: 0
       };
+      this.scale = 0.2;
     }
 
     Coral.prototype.tick = function() {
-      return viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.2);
+      return viewcontroller.renderSprite(this.image, this.position.x, this.position.y, this.scale);
     };
 
     return Coral;
@@ -31,6 +32,7 @@
       this.image = this.fish_raw.image;
       this.price = this.fish_raw.price;
       this.name = this.fish_raw.name;
+      this.scale = 0.5;
       viewcontroller.loadImages(this.image);
       this.position = {
         x: 0,
@@ -54,7 +56,7 @@
       var flip;
 
       flip = this.direction.x < 0;
-      viewcontroller.renderSprite(this.image, this.position.x, this.position.y, 0.5, flip);
+      viewcontroller.renderSprite(this.image, this.position.x, this.position.y, this.scale, flip);
       if (this.salt_ok() === true) {
         this.position.x += this.direction.x * 10;
         this.position.y += this.direction.y * 10;
@@ -69,12 +71,16 @@
         }
       }
       if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < 0) {
-        this.direction.x = -this.direction.x;
-        this.direction.y = Math.random() - 0.5;
+        this.direction.x = Math.abs(this.direction.x) * (this.position.x > 0 ? 1 : -1);
+        if (this.salt_ok()) {
+          this.direction.y = Math.random() - 0.5;
+        }
       }
       if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < 0) {
-        this.direction.y = -this.direction.y;
-        this.direction.x = Math.random() - 0.5;
+        this.direction.y = Math.abs(this.direction.y) * (this.position.y > 0 ? 1 : -1);
+        if (this.salt_ok()) {
+          this.direction.x = Math.random() - 0.5;
+        }
       }
       return document.tank.waste += 0.02;
     };
@@ -85,9 +91,6 @@
 
   FishTankCanvasController = (function() {
     function FishTankCanvasController() {
-      var me;
-
-      me = this;
       this.relinquishcontrol = false;
       this.fishes = [];
       this.fishes.push(new Fish('clownfish.json'));
@@ -497,21 +500,25 @@
     }
 
     HandTool.prototype.click = function(x, y) {
-      var distance, i, xs, ys, _i, _ref;
+      var distance, thisfish, xs, ys, _i, _len, _ref, _results;
 
       this.grabbed = null;
-      for (i = _i = 0, _ref = document.tankcontroller.fishes.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
-        document.tankcontroller.fishes[i].scale = 0.5;
-        xs = document.tankcontroller.fishes[i].position.x - x + document.tankcontroller.fishes[i].scale * 0.5 * document.viewcontroller.images[document.tankcontroller.fishes[i].image].image.width;
+      _ref = document.tankcontroller.fishes.concat(document.tankcontroller.corals);
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        thisfish = _ref[_i];
+        xs = thisfish.position.x - x + thisfish.scale * 0.5 * document.viewcontroller.images[thisfish.image].image.width;
         xs = xs * xs;
-        ys = document.tankcontroller.fishes[i].position.y - y + document.tankcontroller.fishes[i].scale * 0.5 * document.viewcontroller.images[document.tankcontroller.fishes[i].image].image.height;
+        ys = thisfish.position.y - y + thisfish.scale * 0.5 * document.viewcontroller.images[thisfish.image].image.height;
         ys = ys * ys;
         distance = Math.sqrt(xs + ys);
         if (distance < 50) {
-          this.grabbed = document.tankcontroller.fishes[i];
+          _results.push(this.grabbed = thisfish);
+        } else {
+          _results.push(void 0);
         }
       }
-      return true;
+      return _results;
     };
 
     HandTool.prototype.hold = function(x, y) {

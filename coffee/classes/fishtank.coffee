@@ -6,7 +6,7 @@
 
 class FishTankCanvasController
 	constructor: ->
-		me = @
+			
 		@relinquishcontrol = no;
 
 		@fishes = [];
@@ -20,6 +20,8 @@ class FishTankCanvasController
 		@tank = new Tank('TankBackground.jpg')
 		document.tank = @tank;
 		document.tankcontroller = @
+
+		
 
 
 	tick: ->
