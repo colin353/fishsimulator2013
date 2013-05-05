@@ -28,8 +28,7 @@
         a = _ref[_k];
         unique = md5(a.filename);
         $("#buythis" + unique).click(function() {
-          document.tool = new BuyTool(a, document.tool);
-          return alert("clicked");
+          return document.tool = new BuyTool(a, document.tool);
         });
       }
     }
@@ -58,7 +57,7 @@
     BuyMenuController.prototype.buymenu_mediaObject = function(content) {
       var retval;
 
-      retval = "<div class='span3'><div class='media'><a class='pull-left' id='#buythis" + content.unique + "' href='#'>				  <img class='media-object' style='width: 64px' src='game/images/" + content.image + "'>				  </a><div class='media-body'><h4 class='media-heading'>" + content.title + "</h4>				  	" + content.text + "</div></div></div>";
+      retval = "<div class='span3'><div class='media'><a class='pull-left' id='buythis" + content.unique + "' href='#'>				  <img class='media-object' style='width: 64px' src='game/images/" + content.image + "'>				  </a><div class='media-body'><h4 class='media-heading'>" + content.title + "</h4>				  	" + content.text + "</div></div></div>";
       return retval;
     };
 
@@ -700,9 +699,9 @@
     }
 
     BuyTool.prototype.click = function(x, y) {
-      document.tankcontroller.fishes.push(this.purchased);
+      document.tankcontroller.fishes.push(new Fish(this.purchased.filename));
       document.tool = this.prev_tool;
-      return destroy(this);
+      return delete this;
     };
 
     return BuyTool;

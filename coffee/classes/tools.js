@@ -181,9 +181,9 @@ BuyTool = (function() {
   }
 
   BuyTool.prototype.click = function(x, y) {
-    document.tankcontroller.fishes.push(this.purchased);
+    document.tankcontroller.fishes.push(new Fish(this.purchased.filename));
     document.tool = this.prev_tool;
-    return destroy(this);
+    return delete this;
   };
 
   return BuyTool;
