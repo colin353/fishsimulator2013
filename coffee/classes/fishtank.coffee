@@ -37,9 +37,11 @@ class FishTankCanvasController
 		# First thing is to render the background image
 		
 		@tank.tick()
-		a.tick() for a in @machines
-		a.tick() for a in @corals
-		a.tick() for a in @fishes
+		a.tick() if a? for a in @machines
+		for a in @corals then if a?
+			a.tick() 
+		for a in @fishes then if a? 
+			a.tick() 
 		a.tick() for a in @pellets
 		for a in viewcontroller.inputstack
 			if a.type == 'M'

@@ -159,6 +159,20 @@
       }
     };
 
+    Fish.prototype.annhilate = function() {
+      var i, _i, _ref, _results;
+
+      _results = [];
+      for (i = _i = 0, _ref = document.tankcontroller.fishes.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+        if (document.tankcontroller.fishes[i] === this) {
+          _results.push(document.tankcontroller.fishes.splice(i, 1));
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+
     Fish.prototype.nearest_pellet = function() {
       var bestdistance, bestpos, distance, i, p, xs, ys, _i, _len, _ref;
 
@@ -193,7 +207,7 @@
     Fish.prototype.nearest_fish = function() {
       var distance, f, i, targetfish, targetfishdist, targetpos, xs, ys, _i, _len, _ref;
 
-      targetfishdist = 1000;
+      targetfishdist = 100;
       targetpos = {
         x: -1,
         y: -1
@@ -260,8 +274,8 @@
         }
       }
       if (this.health === 0) {
-        alert("Fish is dead");
-        this.alive = false;
+        alert("Your " + this.name + " has died!");
+        this.annhilate();
       }
       enemyspotted = this.nearest_fish();
       if (enemyspotted.x > -1) {
@@ -274,9 +288,7 @@
         this.direction.x = this.direction.x / norm;
         this.direction.y = this.direction.y / norm;
         if (enemyspotted.distance < 30) {
-          if (this.fish_raw.growth_rate != null) {
-            this.scale += 0.01 * this.fish_raw.growth_rate;
-          }
+          true;
         }
       }
       closest = this.nearest_pellet();
@@ -389,32 +401,44 @@
     }
 
     FishTankCanvasController.prototype.tick = function() {
-      var a, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
+      var a, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _ref3;
 
       this.tank.tick();
-      _ref = this.machines;
+      if ((function() {
+        var _i, _len, _ref, _results;
+
+        _ref = this.machines;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          a = _ref[_i];
+          _results.push(a != null);
+        }
+        return _results;
+      }).call(this)) {
+        a.tick();
+      }
+      _ref = this.corals;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         a = _ref[_i];
-        a.tick();
+        if (a != null) {
+          a.tick();
+        }
       }
-      _ref1 = this.corals;
+      _ref1 = this.fishes;
       for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
         a = _ref1[_j];
-        a.tick();
+        if (a != null) {
+          a.tick();
+        }
       }
-      _ref2 = this.fishes;
+      _ref2 = this.pellets;
       for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
         a = _ref2[_k];
         a.tick();
       }
-      _ref3 = this.pellets;
+      _ref3 = viewcontroller.inputstack;
       for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
         a = _ref3[_l];
-        a.tick();
-      }
-      _ref4 = viewcontroller.inputstack;
-      for (_m = 0, _len4 = _ref4.length; _m < _len4; _m++) {
-        a = _ref4[_m];
         if (a.type === 'M') {
           document.tool.click(a.x, a.y);
         }

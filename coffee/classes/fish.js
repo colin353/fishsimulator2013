@@ -49,6 +49,20 @@ Fish = (function() {
     }
   };
 
+  Fish.prototype.annhilate = function() {
+    var i, _i, _ref, _results;
+
+    _results = [];
+    for (i = _i = 0, _ref = document.tankcontroller.fishes.length; 0 <= _ref ? _i < _ref : _i > _ref; i = 0 <= _ref ? ++_i : --_i) {
+      if (document.tankcontroller.fishes[i] === this) {
+        _results.push(document.tankcontroller.fishes.splice(i, 1));
+      } else {
+        _results.push(void 0);
+      }
+    }
+    return _results;
+  };
+
   Fish.prototype.nearest_pellet = function() {
     var bestdistance, bestpos, distance, i, p, xs, ys, _i, _len, _ref;
 
@@ -83,7 +97,7 @@ Fish = (function() {
   Fish.prototype.nearest_fish = function() {
     var distance, f, i, targetfish, targetfishdist, targetpos, xs, ys, _i, _len, _ref;
 
-    targetfishdist = 1000;
+    targetfishdist = 100;
     targetpos = {
       x: -1,
       y: -1
@@ -150,8 +164,8 @@ Fish = (function() {
       }
     }
     if (this.health === 0) {
-      alert("Fish is dead");
-      this.alive = false;
+      alert("Your " + this.name + " has died!");
+      this.annhilate();
     }
     enemyspotted = this.nearest_fish();
     if (enemyspotted.x > -1) {
@@ -164,9 +178,7 @@ Fish = (function() {
       this.direction.x = this.direction.x / norm;
       this.direction.y = this.direction.y / norm;
       if (enemyspotted.distance < 30) {
-        if (this.fish_raw.growth_rate != null) {
-          this.scale += 0.01 * this.fish_raw.growth_rate;
-        }
+        true;
       }
     }
     closest = this.nearest_pellet();

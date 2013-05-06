@@ -33,6 +33,12 @@ class Fish
 		else 
 			return yes
 
+	annhilate: ->
+		for i in [0...document.tankcontroller.fishes.length]
+			if document.tankcontroller.fishes[i] == @
+				document.tankcontroller.fishes.splice i,1
+
+
 	nearest_pellet: ->
 		bestdistance = 200;
 		bestpos = {x: -1, y: -1} 
@@ -53,7 +59,7 @@ class Fish
 		return bestpos;
 
 	nearest_fish: ->
-		targetfishdist = 1000;
+		targetfishdist = 100;
 		targetpos = {x: -1, y: -1}
 		i = 0;
 		targetfish = null;
@@ -98,8 +104,8 @@ class Fish
 					target_victim = @nearest_fish
 		
 		if @health == 0 
-			alert "Fish is dead"
-			@alive = false
+			alert "Your #{@name} has died!"
+			@annhilate()
 		
 
 		enemyspotted = @nearest_fish()
@@ -113,9 +119,8 @@ class Fish
 			@direction.x = @direction.x / norm;
 			@direction.y = @direction.y / norm;
 			if enemyspotted.distance < 30
-					
-
-				@scale += 0.01 * @fish_raw.growth_rate if @fish_raw.growth_rate?
+				yes
+				#@scale += 0.01 * @fish_raw.growth_rate if @fish_raw.growth_rate?
 				#alert "I ate pellet #{enemyspotted.pellet}"
 
 		closest = @nearest_pellet()
