@@ -13,9 +13,11 @@ $ ->
 	document.tools['cool'] = new CoolTool('icecube.png')
 	document.tools['salt'] = new SaltTool('salt.png')
 	document.tools['hand'] = new HandTool('hand.png')
+	document.tools['siphon'] = new SiphonTool('siphon.png')
+	document.tools['water'] = new WaterTool('water.png')
 	document.tool = document.tools['hand'];
 
-	document.buymenu = new BuyMenuController();
+	document.buymenu = new BuyMenuController(); 
 
 tick = ->
 	viewcontroller.tick()

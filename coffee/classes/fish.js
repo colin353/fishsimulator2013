@@ -13,6 +13,8 @@ Fish = (function() {
     this.price = this.fish_raw.price;
     this.name = this.fish_raw.name;
     this.crustacean = this.fish_raw.crustacean;
+    this.health = this.fish_raw.hitpoints;
+    this.alive = this.fish_raw.alive;
     this.scale = 0.5;
     if (this.fish_raw.scale != null) {
       this.scale = this.fish_raw.scale;
@@ -68,9 +70,31 @@ Fish = (function() {
     return bestpos;
   };
 
-  Fish.prototype.tick = function() {
-    var closest, flip, norm, reverse;
+  Fish.prototype.near_fish = function() {
+    var distance_fish, f, xs, ys, _i, _len, _ref;
 
+    _ref = document.tankcontroller.fishes;
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      f = _ref[_i];
+      xs = p.position.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2);
+      xs = xs * xs;
+      ys = p.position.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2);
+      ys = ys * ys;
+      distance_fish = Math.sqrt(xs + ys);
+      if (distance < 10) {
+        return true;
+      }
+    }
+  };
+
+  Fish.prototype.tick = function() {
+    var closest, flip, isnearfish, norm, reverse;
+
+    isnearfish = this.near_fish;
+    if (this.health === 0) {
+      alert("Fish is dead");
+      this.alive = false;
+    }
     closest = this.nearest_pellet();
     if (closest.x > -1) {
       this.direction.x = (closest.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2)) * 0.005;
@@ -101,10 +125,11 @@ Fish = (function() {
     if (this.salt_ok() === false) {
       if (this.position.y < viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50) {
         this.position.y += 0.5;
+        this.health -= 0.3;
       }
     }
-    if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < 0) {
-      if (this.position.x < 0) {
+    if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < document.tank.pixelwaterline) {
+      if (this.position.x < document.tank.pixelwaterline) {
         reverse = 1;
       } else {
         reverse = -1;
@@ -114,8 +139,8 @@ Fish = (function() {
         this.direction.y = Math.random() - 0.5;
       }
     }
-    if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < 0) {
-      if (this.position.y < 0) {
+    if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < document.tank.pixelwaterline) {
+      if (this.position.y < document.tank.pixelwaterline) {
         reverse = 1;
       } else {
         reverse = -1;

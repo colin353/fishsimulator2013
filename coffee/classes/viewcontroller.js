@@ -62,6 +62,12 @@ ViewController = (function() {
     $("#salttool").click(function() {
       return document.tool = document.tools['salt'];
     });
+    $("#siphontool").click(function() {
+      return document.tool = document.tools['siphon'];
+    });
+    $("#watertool").click(function() {
+      return document.tool = document.tools['water'];
+    });
   }
 
   ViewController.prototype.ready = function() {
@@ -76,8 +82,8 @@ ViewController = (function() {
           return false;
         }
       }
+      return true;
     }
-    return true;
   };
 
   ViewController.prototype.loadImages = function() {

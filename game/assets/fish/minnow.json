@@ -9,5 +9,6 @@
 	"strength" : 1,
 	"growth_rate" : 1,
 	"crustacean" : 0,
-	"description" : "a Very inexpensive fish, Somewhat hardy, Very low salt tolerance, low aggression"
+	"description" : "a Very inexpensive fish, Somewhat hardy, Very low salt tolerance, low aggression", 
+	"alive" : true
 }	 	

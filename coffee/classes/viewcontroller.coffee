@@ -1,4 +1,3 @@
-
 #= require gimage.coffee
 #= require gmap.coffee
 #= require helpers.coffee
@@ -6,9 +5,10 @@
 #= require fisntank.coffee
 #= require tools.coffee
 #= require buymenu.coffee
+#= require machine.coffee
 
-#  The view controller is an abstraction for the canvas, and drawing is done through it. It also manages 
-#  asset loading, e.g. images.
+# The view controller is an abstraction for the canvas, and drawing is done through it. It also manages
+# asset loading, e.g. images.
 
 class ViewController
 	constructor: (selector = "pokeCanvas") ->
@@ -16,7 +16,7 @@ class ViewController
 		@context = @canvas.getContext('2d')
 		@context.font = '45px "Courier"';
 		# Need to specify alternative font choice for mobile safari, for some reason
-		@context.font = '45px "Courier"' if isMobileSafari() 
+		@context.font = '45px "Courier"' if isMobileSafari()
 		@images = [];
 		@map = [];
 		@stack = [];
@@ -30,7 +30,7 @@ class ViewController
 		me = @;
 
 		# Register the button input here...
-		# e.g. bind x y z	
+		# e.g. bind x y z
 
 		$(document).mouseup (e) ->
 			me.mousedown = no
@@ -58,6 +58,10 @@ class ViewController
 			document.tool = document.tools['hand']
 		$("#salttool").click ->
 			document.tool = document.tools['salt']
+		$("#siphontool").click ->
+			document.tool = document.tools['siphon']
+		$("#watertool").click ->
+			document.tool = document.tools['water']
 
 
 	ready: ->
@@ -65,7 +69,7 @@ class ViewController
 			for b in a
 				if !b[a].loaded? or !b[a].loaded
 					return no
-		return yes
+			return yes
 
 	loadImages: (list...) ->
 		@images[a] = new GImage(a,@) for a in list
@@ -81,7 +85,7 @@ class ViewController
 			@context.scale(-1, 1)
 			@context.translate(-@canvas.width/2,0)
 			x = @canvas.width - x - width*scale
-		@context.drawImage(@images[image].image,x,y,width*scale,height*scale) 
+		@context.drawImage(@images[image].image,x,y,width*scale,height*scale)
 		@context.restore()
 
 	imageLoaded: ->
@@ -90,7 +94,7 @@ class ViewController
 	canvasinput_mouseClick: (x,y) ->
 		x = Math.floor(x-$(@.canvas).offset().left)
 		y = Math.floor(y-$(@.canvas).offset().top)
-		#alert "#{x}, #{y}" 
+		#alert "#{x}, #{y}"
 		@inputstack.push new GInputEvent('M',x,y)
 
 	canvasinput_mouseDrag: (x,y) ->
@@ -99,8 +103,8 @@ class ViewController
 		@inputstack.push new GInputEvent('MD',x,y)
 
 	tick: ->
-		#if !@stack? 
-		#	return no;
+		#if !@stack?
+		# return no;
 
 		return no if !@ready()
 

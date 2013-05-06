@@ -10,6 +10,7 @@ FishTankCanvasController = (function() {
     this.fishes.push(new Fish('clownfish.json'));
     this.fishes.push(new Fish('minnow.json'));
     this.fishes.push(new Fish('hermitcrab.json'));
+    this.fishes.push(new Fish('pufferfish.json'));
     this.corals = [];
     this.corals.push(new Coral('TubeCoralOrange.json'));
     this.corals[0].position = {
@@ -32,32 +33,39 @@ FishTankCanvasController = (function() {
       y: 200
     };
     this.tank = new Tank('TankBackground.jpg');
+    this.machines = [];
+    this.machines.push(new Machine('filter.json'));
     document.tank = this.tank;
     document.tankcontroller = this;
   }
 
   FishTankCanvasController.prototype.tick = function() {
-    var a, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _ref3;
+    var a, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _m, _ref, _ref1, _ref2, _ref3, _ref4;
 
     this.tank.tick();
-    _ref = this.corals;
+    _ref = this.machines;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       a = _ref[_i];
       a.tick();
     }
-    _ref1 = this.fishes;
+    _ref1 = this.corals;
     for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
       a = _ref1[_j];
       a.tick();
     }
-    _ref2 = this.pellets;
+    _ref2 = this.fishes;
     for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
       a = _ref2[_k];
       a.tick();
     }
-    _ref3 = viewcontroller.inputstack;
+    _ref3 = this.pellets;
     for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
       a = _ref3[_l];
+      a.tick();
+    }
+    _ref4 = viewcontroller.inputstack;
+    for (_m = 0, _len4 = _ref4.length; _m < _len4; _m++) {
+      a = _ref4[_m];
       if (a.type === 'M') {
         document.tool.click(a.x, a.y);
       }

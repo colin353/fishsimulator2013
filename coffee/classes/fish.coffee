@@ -1,5 +1,4 @@
 # The Overlay
-
 class Fish
 	constructor: (filename) ->
 		@filename = filename
@@ -13,12 +12,15 @@ class Fish
 		@price = @fish_raw.price
 		@name = @fish_raw.name
 		@crustacean = @fish_raw.crustacean
-		@scale = 0.5;
+		@health = @fish_raw.hitpoints
+		@alive = @fish_raw.alive
+		@scale = 0.5
 		@scale = @fish_raw.scale if @fish_raw.scale?
 		@description = @fish_raw.description
 		viewcontroller.loadImages @image;
 		@position = {x: 0, y: 0}; 
 		@direction = {x: Math.random(), y: Math.random()};
+	
 
 	salt_ok: ->
 		if document.tank.salt > @fish_raw.salt_max or document.tank.salt < @fish_raw.salt_min
@@ -45,9 +47,26 @@ class Fish
 
 		return bestpos;
 
+	near_fish: ->
+		for f in document.tankcontroller.fishes
+			xs =  p.position.x - (@position.x + @scale*document.viewcontroller.images[@image].image.width/2);
+			xs = xs * xs
+			ys = p.position.y - (@position.y + @scale*document.viewcontroller.images[@image].image.height/2);
+			ys = ys * ys
+			distance_fish = Math.sqrt( xs + ys )
+			if distance < 10
+				return true
 
 	tick: ->
+
+		isnearfish = @near_fish;
+
+
 		
+		if @health == 0 
+			alert "Fish is dead"
+			@alive = false
+
 		closest = @nearest_pellet()
 		if closest.x > -1
 			#alert closest.x
@@ -77,15 +96,16 @@ class Fish
 		if @salt_ok() == no
 			if(@position.y < viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50) 
 				@position.y += 0.5;
+				@health -= 0.3;
 
 
-		if(@position.x > viewcontroller.canvas.width - 0.5*viewcontroller.images[@image].image.width || @position.x < 0) 
-			if @position.x < 0 then reverse = 1 else reverse = -1;
+		if(@position.x > viewcontroller.canvas.width - 0.5*viewcontroller.images[@image].image.width || @position.x < document.tank.pixelwaterline) 
+			if @position.x < document.tank.pixelwaterline then reverse = 1 else reverse = -1;
 			@direction.x = Math.abs(@direction.x) * reverse;
 			@direction.y = Math.random()-0.5 if @salt_ok()
 
-		if(@position.y > viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50|| @position.y < 0) 
-			if @position.y < 0 then reverse = 1 else reverse = -1;
+		if(@position.y > viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50|| @position.y < document.tank.pixelwaterline) 
+			if @position.y < document.tank.pixelwaterline then reverse = 1 else reverse = -1;
 			@direction.y = Math.abs(@direction.y) * reverse
 			@direction.x = Math.random()-0.5 if @salt_ok()
 

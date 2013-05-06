@@ -83,7 +83,7 @@ class HandTool
 
 	click: (x,y) ->
 		@grabbed = null;
-		for thisfish in document.tankcontroller.fishes.concat document.tankcontroller.corals
+		for thisfish in document.tankcontroller.fishes.concat document.tankcontroller.corals, document.tankcontroller.machines
 			xs = thisfish.position.x - x + thisfish.scale * 0.5 * document.viewcontroller.images[thisfish.image].image.width
 			xs = xs * xs
 			ys = thisfish.position.y - y + thisfish.scale * 0.5 * document.viewcontroller.images[thisfish.image].image.height
@@ -127,7 +127,7 @@ class BuyTool
 class SiphonTool
 	constructor: (image) ->
 		@image = image;  
-		@scale = 0.6;
+		@scale = 0.8;
 		viewcontroller.loadImages @image if @image?
 
 	click: (x,y) ->
@@ -135,13 +135,13 @@ class SiphonTool
 
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
-		if document.tank.waste > 0
-			document.tank.waste -=2;
+		if document.tank.waterline > 30
+			document.tank.waterline -= 0.025;
 
 class WaterTool
 	constructor: (image) ->
 		@image = image;  
-		@scale = 0.6;
+		@scale = 0.3;
 		viewcontroller.loadImages @image if @image?
 
 	click: (x,y) ->
@@ -149,5 +149,7 @@ class WaterTool
 
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
-		if document.tank.waste > 0
-			document.tank.waste -=2;
+
+		if document.tank.waterline < 100
+			document.tank.waterline += 0.025;
+			document.tank.salt -= 50 / document.tank.waterline if document.tank.salt > 0

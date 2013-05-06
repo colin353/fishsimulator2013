@@ -3,7 +3,7 @@ var BuyMenuController;
 
 BuyMenuController = (function() {
   function BuyMenuController() {
-    var a, coral_files, f, fish_files, unique, _i, _j, _k, _len, _len1, _len2, _ref;
+    var a, coral_files, f, fish_files, machine_files, unique, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref;
 
     fish_files = sync_get('game/assets/glob.php?type=fish');
     fish_files = JSON.parse(fish_files);
@@ -19,10 +19,17 @@ BuyMenuController = (function() {
       f = coral_files[_j];
       this.corals.push(new Coral(f));
     }
+    machine_files = sync_get('game/assets/glob.php?type=machines');
+    machine_files = JSON.parse(machine_files);
+    this.machines = [];
+    for (_k = 0, _len2 = machine_files.length; _k < _len2; _k++) {
+      f = machine_files[_k];
+      this.machines.push(new Machine(f));
+    }
     this.refresh();
-    _ref = this.fishes.concat(this.corals);
-    for (_k = 0, _len2 = _ref.length; _k < _len2; _k++) {
-      a = _ref[_k];
+    _ref = this.fishes.concat(this.corals, this.machines);
+    for (_l = 0, _len3 = _ref.length; _l < _len3; _l++) {
+      a = _ref[_l];
       unique = md5(a.filename);
       $("#buythis" + unique).data('jsonfile', a.filename).data('type', a.type).click(function() {
         return document.tool = new BuyTool($(this).data('jsonfile'), $(this).data('type'), document.tool);
@@ -34,7 +41,7 @@ BuyMenuController = (function() {
     var a, desc, html, _i, _len, _ref;
 
     html = "";
-    _ref = this.fishes.concat(this.corals);
+    _ref = this.fishes.concat(this.corals, this.machines);
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       a = _ref[_i];
       desc = "This item has no description whatsoever.";
