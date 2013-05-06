@@ -206,8 +206,8 @@
           this.position.y += 0.5;
         }
       }
-      if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < 0) {
-        if (this.position.x < 0) {
+      if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < document.tank.pixelwaterline) {
+        if (this.position.x < document.tank.pixelwaterline) {
           reverse = 1;
         } else {
           reverse = -1;
@@ -217,8 +217,8 @@
           this.direction.y = Math.random() - 0.5;
         }
       }
-      if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < 0) {
-        if (this.position.y < 0) {
+      if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < document.tank.pixelwaterline) {
+        if (this.position.y < document.tank.pixelwaterline) {
           reverse = 1;
         } else {
           reverse = -1;
@@ -553,15 +553,21 @@
   Tank = (function() {
     function Tank(image) {
       this.image = image;
+      this.waterimage = 'waterline.png';
       this.temperature = 75;
       this.salt = 0;
       this.supply = 100;
       this.waste = 0;
-      viewcontroller.loadImages(image);
+      this.waterline = 100;
+      this.pixelwaterline = (this.waterline - 100) * 400 + this.pixelwaterline;
+      viewcontroller.loadImages(image, this.waterimage);
     }
 
     Tank.prototype.tick = function() {
       viewcontroller.renderSprite(this.image, 0, 0, 1.2);
+      this.pixelwaterline = (this.waterline - 100) * 400 + 50;
+      viewcontroller.renderSprite(this.waterimage, 0, this.pixelwaterline, 1.2);
+      viewcontroller.renderSprite(this.waterimage, 400, this.pixelwaterline, 1.2);
       $("#tank_supply").css('width', this.supply + '%');
       $("#tank_salt").css('width', this.salt + '%');
       $("#tank_waste").css('width', this.waste + '%');

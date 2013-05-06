@@ -79,13 +79,13 @@ class Fish
 				@position.y += 0.5;
 
 
-		if(@position.x > viewcontroller.canvas.width - 0.5*viewcontroller.images[@image].image.width || @position.x < 0) 
-			if @position.x < 0 then reverse = 1 else reverse = -1;
+		if(@position.x > viewcontroller.canvas.width - 0.5*viewcontroller.images[@image].image.width || @position.x < document.tank.pixelwaterline) 
+			if @position.x < document.tank.pixelwaterline then reverse = 1 else reverse = -1;
 			@direction.x = Math.abs(@direction.x) * reverse;
 			@direction.y = Math.random()-0.5 if @salt_ok()
 
-		if(@position.y > viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50|| @position.y < 0) 
-			if @position.y < 0 then reverse = 1 else reverse = -1;
+		if(@position.y > viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50|| @position.y < document.tank.pixelwaterline) 
+			if @position.y < document.tank.pixelwaterline then reverse = 1 else reverse = -1;
 			@direction.y = Math.abs(@direction.y) * reverse
 			@direction.x = Math.random()-0.5 if @salt_ok()
 

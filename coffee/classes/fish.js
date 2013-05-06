@@ -103,8 +103,8 @@ Fish = (function() {
         this.position.y += 0.5;
       }
     }
-    if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < 0) {
-      if (this.position.x < 0) {
+    if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < document.tank.pixelwaterline) {
+      if (this.position.x < document.tank.pixelwaterline) {
         reverse = 1;
       } else {
         reverse = -1;
@@ -114,8 +114,8 @@ Fish = (function() {
         this.direction.y = Math.random() - 0.5;
       }
     }
-    if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < 0) {
-      if (this.position.y < 0) {
+    if (this.position.y > viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50 || this.position.y < document.tank.pixelwaterline) {
+      if (this.position.y < document.tank.pixelwaterline) {
         reverse = 1;
       } else {
         reverse = -1;
