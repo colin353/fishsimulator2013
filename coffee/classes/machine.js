@@ -9,6 +9,10 @@ Machine = (function() {
     if (this.machine_raw.name == null) {
       alert("Illegal Machine \"" + filename + "\"");
     }
+    this.name = this.machine_raw.name;
+    if (this.machine_raw.description) {
+      this.description = this.machine_raw.description;
+    }
     this.image = this.machine_raw.image;
     viewcontroller.loadImages(this.image);
     this.position = {

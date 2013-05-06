@@ -208,6 +208,14 @@ BuyTool = (function() {
           y: y - a.scale * document.viewcontroller.images[a.image].image.width * 0.5
         };
         document.tankcontroller.corals.push(a);
+        break;
+      case 'machine':
+        a = new Machine(this.purchased);
+        a.position = {
+          x: x - a.scale * document.viewcontroller.images[a.image].image.width * 0.5,
+          y: y - a.scale * document.viewcontroller.images[a.image].image.width * 0.5
+        };
+        document.tankcontroller.machines.push(a);
     }
     document.tool = this.prev_tool;
     return delete this;

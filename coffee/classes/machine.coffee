@@ -4,11 +4,14 @@ class Machine
 	constructor: (filename) ->
 
 		@filename = filename
+
 		@machine_raw = sync_get 'game/assets/machines/' + filename
 		@type = "machine";
 		if !@machine_raw.name?
 			alert "Illegal Machine \"#{filename}\""
 
+		@name = @machine_raw.name;
+		@description = @machine_raw.description if @machine_raw.description;
 		@image = @machine_raw.image;  
 
 		viewcontroller.loadImages @image;

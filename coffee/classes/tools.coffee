@@ -117,6 +117,13 @@ class BuyTool
 					y: y - a.scale*document.viewcontroller.images[a.image].image.width*0.5
 				}
 				document.tankcontroller.corals.push a
+			when 'machine' 
+				a = new Machine(@purchased)
+				a.position = {
+					x: x - a.scale*document.viewcontroller.images[a.image].image.width*0.5, 
+					y: y - a.scale*document.viewcontroller.images[a.image].image.width*0.5
+				}
+				document.tankcontroller.machines.push a
 
 		document.tool = @prev_tool;
 		delete @
