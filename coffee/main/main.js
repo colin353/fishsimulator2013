@@ -19,7 +19,10 @@ $(function() {
   document.tools['hand'] = new HandTool('hand.png');
   document.tools['siphon'] = new SiphonTool('siphon.png');
   document.tools['water'] = new WaterTool('water.png');
+<<<<<<< HEAD
   document.tool = document.tools['hand'];
+=======
+>>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
   document.tool = document.tools['siphon'];
   return document.buymenu = new BuyMenuController();
 });

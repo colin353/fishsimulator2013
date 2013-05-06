@@ -15,11 +15,16 @@ $ ->
 	document.tools['hand'] = new HandTool('hand.png')
 	document.tools['siphon'] = new SiphonTool('siphon.png')
 	document.tools['water'] = new WaterTool('water.png')
+<<<<<<< HEAD
 
 	document.tool = document.tools['hand'];
 
 	document.tool = document.tools['siphon'];
 
+=======
+	document.tool = document.tools['siphon'];
+
+>>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
 	document.buymenu = new BuyMenuController(); 
 
 tick = ->
@@ -27,4 +32,8 @@ tick = ->
 
 	setTimeout tick, viewcontroller.timestep  
 
+<<<<<<< HEAD
 tick()  
+=======
+tick()  
+>>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302

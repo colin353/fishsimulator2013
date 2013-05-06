@@ -929,6 +929,14 @@
             y: y - a.scale * document.viewcontroller.images[a.image].image.width * 0.5
           };
           document.tankcontroller.corals.push(a);
+          break;
+        case 'machine':
+          a = new Machine(this.purchased);
+          a.position = {
+            x: x - a.scale * document.viewcontroller.images[a.image].image.width * 0.5,
+            y: y - a.scale * document.viewcontroller.images[a.image].image.width * 0.5
+          };
+          document.tankcontroller.machines.push(a);
       }
       document.tool = this.prev_tool;
       return delete this;
@@ -960,7 +968,11 @@
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
       if (document.tank.waterline > 30) {
+<<<<<<< HEAD
         return document.tank.waterline -= 0.025;
+=======
+        return document.tank.waterline -= 0.01;
+>>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
       }
     };
 
@@ -986,9 +998,15 @@
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
       if (document.tank.waterline < 100) {
+<<<<<<< HEAD
         document.tank.waterline += 0.025;
         if (document.tank.salt > 0) {
           return document.tank.salt -= 50 / document.tank.waterline;
+=======
+        document.tank.waterline += 0.01;
+        if (document.tank.salt > 0) {
+          return document.tank.salt -= 10 / document.tank.waterline;
+>>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
         }
       }
     };
@@ -1164,7 +1182,10 @@
     document.tools['hand'] = new HandTool('hand.png');
     document.tools['siphon'] = new SiphonTool('siphon.png');
     document.tools['water'] = new WaterTool('water.png');
+<<<<<<< HEAD
     document.tool = document.tools['hand'];
+=======
+>>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
     document.tool = document.tools['siphon'];
     return document.buymenu = new BuyMenuController();
   });

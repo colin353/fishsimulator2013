@@ -49,7 +49,7 @@ class CoolTool
 	constructor: (image) ->
 		@image = image;  
 		viewcontroller.loadImages image if image?
-		@scale = 1;
+		@scale = 2;
 
 	click: (x,y) ->
 		yes
@@ -117,6 +117,13 @@ class BuyTool
 					y: y - a.scale*document.viewcontroller.images[a.image].image.width*0.5
 				}
 				document.tankcontroller.corals.push a
+			when 'machine' 
+				a = new Machine(@purchased)
+				a.position = {
+					x: x - a.scale*document.viewcontroller.images[a.image].image.width*0.5, 
+					y: y - a.scale*document.viewcontroller.images[a.image].image.width*0.5
+				}
+				document.tankcontroller.machines.push a
 
 		document.tool = @prev_tool;
 		delete @
@@ -136,7 +143,11 @@ class SiphonTool
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
 		if document.tank.waterline > 30
+<<<<<<< HEAD
 			document.tank.waterline -= 0.025;
+=======
+			document.tank.waterline -= 0.01;
+>>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
 
 class WaterTool
 	constructor: (image) ->
@@ -151,5 +162,10 @@ class WaterTool
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
 
 		if document.tank.waterline < 100
+<<<<<<< HEAD
 			document.tank.waterline += 0.025;
 			document.tank.salt -= 50 / document.tank.waterline if document.tank.salt > 0
+=======
+			document.tank.waterline += 0.01;
+			document.tank.salt -= 10 / document.tank.waterline if document.tank.salt > 0
+>>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
