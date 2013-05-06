@@ -23,4 +23,4 @@ class Coral
 	tick: ->
 		
 		# First thing is to render the background image
-		viewcontroller.renderSprite(@image,@position.x,@position.y,@scale)	
+		viewcontroller.renderSprite(@image,@position.x,@position.y,@scale)

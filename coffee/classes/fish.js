@@ -29,14 +29,17 @@ Fish = (function() {
       x: Math.random(),
       y: Math.random()
     };
-<<<<<<< HEAD
     this.fight = false;
     this.aggression = null;
-=======
-    this.health = this.fish_raw.hitpoints;
-    this.dead = this.fish_raw.alive;
->>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
   }
+
+  Fish.prototype.temp_ok = function() {
+    if (document.tank.temperature > this.fish_raw.temp_max || document.tank.temperature < this.fish_raw.temp_min) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   Fish.prototype.salt_ok = function() {
     if (document.tank.salt > this.fish_raw.salt_max || document.tank.salt < this.fish_raw.salt_min) {

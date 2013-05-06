@@ -20,16 +20,13 @@ class Fish
 		viewcontroller.loadImages @image;
 		@position = {x: 0, y: 0}; 
 		@direction = {x: Math.random(), y: Math.random()};
-<<<<<<< HEAD
 		@fight = false;
 		@aggression = null;
 	temp_ok: ->
 		if document.tank.temperature > @fish_raw.temp_max or document.tank.temperature < @fish_raw.temp_min
-=======
-		@health = @fish_raw.hitpoints
-		@dead = @fish_raw.alive
-
->>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
+			return no
+		else
+			return yes
 	salt_ok: ->
 		if document.tank.salt > @fish_raw.salt_max or document.tank.salt < @fish_raw.salt_min
 			return no 

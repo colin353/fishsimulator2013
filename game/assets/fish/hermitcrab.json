@@ -6,15 +6,10 @@
 	"salt_min" : 0,
 	"scale" : 1,
 	"crustacean" : 1,
-<<<<<<< HEAD
 	"temp_max" : 80,
 	"temp_min" : 30,
 	"growth_rate" : 4,
 	"hitpoints" : 100,
 	"description" : "A small crustacean who will clean up algae from your tank.",
 	"alive" : true
-=======
-	"growth_rate" : 4,
-	"description" : "A small crustacean who will clean up algae from your tank."
->>>>>>> c64e57ca8698dacc646bb2094849c688bdd15302
 }
