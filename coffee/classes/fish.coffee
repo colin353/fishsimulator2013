@@ -60,6 +60,7 @@ class Fish
 			@direction.y = @direction.y / norm;
 			if closest.distance < 30
 				document.tankcontroller.pellets.splice closest.pellet, 1;
+				@scale += 0.01 * @fish_raw.growth_rate if @fish_raw.growth_rate?
 				#alert "I ate pellet #{closest.pellet}"
 
 		# First thing is to render the background image
@@ -91,4 +92,5 @@ class Fish
 		if @crustacean == 1
 			@position.y = viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 120
 		document.tank.waste += 0.02; 
+
 

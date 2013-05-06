@@ -186,6 +186,9 @@
         this.direction.y = this.direction.y / norm;
         if (closest.distance < 30) {
           document.tankcontroller.pellets.splice(closest.pellet, 1);
+          if (this.fish_raw.growth_rate != null) {
+            this.scale += 0.01 * this.fish_raw.growth_rate;
+          }
         }
       }
       flip = this.direction.x < 0;
@@ -609,7 +612,7 @@
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
       if (document.tank.waste > 0) {
-        return document.tank.waste -= 1;
+        return document.tank.waste -= 0.2;
       }
     };
 
