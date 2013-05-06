@@ -609,7 +609,7 @@
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
       if (document.tank.waste > 0) {
-        return document.tank.waste -= 2;
+        return document.tank.waste -= 1;
       }
     };
 

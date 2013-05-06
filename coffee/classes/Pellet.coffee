@@ -15,7 +15,7 @@ class Pellet
 		
 		@position = {x: 0, y: 0};
 		@scale = 0.2;	
-		@scale = @pellet_raw.scale if @pellet_raw.scale?
+		@scale = @pellet_raw.scale if @pellet_raw.scale? 
 
 
 	tick: ->
