@@ -17,7 +17,9 @@ $(function() {
   document.tools['cool'] = new CoolTool('icecube.png');
   document.tools['salt'] = new SaltTool('salt.png');
   document.tools['hand'] = new HandTool('hand.png');
-  document.tool = document.tools['hand'];
+  document.tools['siphon'] = new SiphonTool('siphon.png');
+  document.tools['water'] = new WaterTool('water.png');
+  document.tool = document.tools['siphon'];
   return document.buymenu = new BuyMenuController();
 });
 

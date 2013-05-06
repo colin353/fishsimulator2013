@@ -224,7 +224,7 @@ BuyTool = (function() {
 SiphonTool = (function() {
   function SiphonTool(image) {
     this.image = image;
-    this.scale = 0.6;
+    this.scale = 0.8;
     if (this.image != null) {
       viewcontroller.loadImages(this.image);
     }
@@ -238,8 +238,8 @@ SiphonTool = (function() {
     if (this.image != null) {
       viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
     }
-    if (document.tank.waste > 0) {
-      return document.tank.waste -= 2;
+    if (document.tank.waterline > 30) {
+      return document.tank.waterline -= 1;
     }
   };
 
@@ -250,7 +250,7 @@ SiphonTool = (function() {
 WaterTool = (function() {
   function WaterTool(image) {
     this.image = image;
-    this.scale = 0.6;
+    this.scale = 0.3;
     if (this.image != null) {
       viewcontroller.loadImages(this.image);
     }
@@ -264,8 +264,8 @@ WaterTool = (function() {
     if (this.image != null) {
       viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
     }
-    if (document.tank.waste > 0) {
-      return document.tank.waste -= 2;
+    if (document.tank.waterline < 100) {
+      return documenet.tank.waterline += 1;
     }
   };
 

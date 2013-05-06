@@ -792,7 +792,7 @@
   SiphonTool = (function() {
     function SiphonTool(image) {
       this.image = image;
-      this.scale = 0.6;
+      this.scale = 0.8;
       if (this.image != null) {
         viewcontroller.loadImages(this.image);
       }
@@ -806,8 +806,8 @@
       if (this.image != null) {
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
-      if (document.tank.waste > 0) {
-        return document.tank.waste -= 2;
+      if (document.tank.waterline > 30) {
+        return document.tank.waterline -= 1;
       }
     };
 
@@ -818,7 +818,7 @@
   WaterTool = (function() {
     function WaterTool(image) {
       this.image = image;
-      this.scale = 0.6;
+      this.scale = 0.3;
       if (this.image != null) {
         viewcontroller.loadImages(this.image);
       }
@@ -832,8 +832,8 @@
       if (this.image != null) {
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
-      if (document.tank.waste > 0) {
-        return document.tank.waste -= 2;
+      if (document.tank.waterline < 100) {
+        return documenet.tank.waterline += 1;
       }
     };
 
@@ -900,6 +900,12 @@
       });
       $("#salttool").click(function() {
         return document.tool = document.tools['salt'];
+      });
+      $("#siphontool").click(function() {
+        return document.tool = document.tools['siphon'];
+      });
+      $("#watertool").click(function() {
+        return document.tool = document.tools['water'];
       });
     }
 
@@ -1000,7 +1006,9 @@
     document.tools['cool'] = new CoolTool('icecube.png');
     document.tools['salt'] = new SaltTool('salt.png');
     document.tools['hand'] = new HandTool('hand.png');
-    document.tool = document.tools['hand'];
+    document.tools['siphon'] = new SiphonTool('siphon.png');
+    document.tools['water'] = new WaterTool('water.png');
+    document.tool = document.tools['siphon'];
     return document.buymenu = new BuyMenuController();
   });
 
