@@ -28,7 +28,7 @@ class Fish
 
 	nearest_pellet: ->
 		bestdistance = 200;
-		bestpos = {x: -1, y: -1}
+		bestpos = {x: -1, y: -1} 
 		i = 0;
 		for p in document.tankcontroller.pellets
 			xs =  p.position.x - (@position.x + @scale*document.viewcontroller.images[@image].image.width/2);
@@ -60,6 +60,7 @@ class Fish
 			@direction.y = @direction.y / norm;
 			if closest.distance < 30
 				document.tankcontroller.pellets.splice closest.pellet, 1;
+				@scale += 0.01 * @fish_raw.growth_rate if @fish_raw.growth_rate?
 				#alert "I ate pellet #{closest.pellet}"
 
 		# First thing is to render the background image

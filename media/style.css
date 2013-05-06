@@ -2,7 +2,13 @@
 * {
 	-webkit-user-select: none;
 }
-
+.progress .bar {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+}​
 input {
 	-webkit-user-select: text;
 }

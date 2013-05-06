@@ -26,7 +26,8 @@ class SpongeTool
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
 		if document.tank.waste > 0
-			document.tank.waste -=2;
+			document.tank.waste -=0.2;
+
 
 class FeedTool
 	constructor: (image) ->
@@ -148,6 +149,11 @@ class WaterTool
 
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
+<<<<<<< HEAD
 		if document.tank.waterline < 100
 			documenet.tank.waterline += 1;
 
+=======
+		if document.tank.waste > 0
+			document.tank.waste -=2;
+>>>>>>> 63b7fc3af0596a8b4dcc72ff56f2d676c4b0ecd6

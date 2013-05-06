@@ -83,6 +83,9 @@ Fish = (function() {
       this.direction.y = this.direction.y / norm;
       if (closest.distance < 30) {
         document.tankcontroller.pellets.splice(closest.pellet, 1);
+        if (this.fish_raw.growth_rate != null) {
+          this.scale += 0.01 * this.fish_raw.growth_rate;
+        }
       }
     }
     flip = this.direction.x < 0;
