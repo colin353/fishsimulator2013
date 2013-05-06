@@ -267,7 +267,10 @@ WaterTool = (function() {
     if (document.tank.waterline < 100) {
       document.tank.waterline += 0.025;
       if (document.tank.salt > 0) {
-        return document.tank.salt -= 50 / document.tank.waterline;
+        document.tank.salt -= 50 / document.tank.waterline;
+      }
+      if (document.tank.waste > 0) {
+        return document.tank.waste -= 50 / document.tank.waterline;
       }
     }
   };
