@@ -92,3 +92,8 @@ class Fish
 			@position.y = viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 120
 		document.tank.waste += 0.02; 
 
+		if(Math.floor(Math.random() * 100) == 28)
+			@direction.x = Math.random()-0.5
+			@direction.y = Math.random()-0.5
+
+
