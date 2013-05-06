@@ -22,6 +22,9 @@ class Fish
 		@direction = {x: Math.random(), y: Math.random()};
 		@fight = false;
 		@aggression = null;
+		@targetfish = null;
+		@enemyspotted = {x: null, y: null}
+		@happiness = 0;
 	temp_ok: ->
 		if document.tank.temperature > @fish_raw.temp_max or document.tank.temperature < @fish_raw.temp_min
 			return no
@@ -66,9 +69,9 @@ class Fish
 			if distance < targetfishdist
 
 				targetfishdist = distance
-				targetpos  = { x: f.position.x, y: f.position.y, f }
+				targetpos  = { x: f.position.x, y: f.position.y }
 				targetpos.fish = i;
-				targetfish = f
+				@targetfish = f
 				i++;
 		targetpos.distance = targetfishdist;
 
@@ -82,41 +85,39 @@ class Fish
 			ys = p.position.y - (@position.y + @scale*document.viewcontroller.images[@image].image.height/2);
 			ys = ys * ys
 			distance_fish = Math.sqrt( xs + ys )
-			if distance < 10
+			if distance < 50
 				return true
 
 	fight_chance: ->
 		chance = Math.random * 100 
-		if chance > (99 - @aggression)
+		if chance > (50- @aggression)
 			return true
 
 	tick: ->
 
 		@aggression = @fish_raw.aggression + (-0.1 * @health) - @happiness;
-		if is_near_fish = true
+		if @is_near_fish == true
 			if @fight_chance() == true
-					target_victim = @nearest_fish
+					@enemyspotted = @nearest_fish()
+			if @enemyspotted.x > -1
+			#alert enemyspotted.x
+				@direction.x = (@enemyspotted.x - (@position.x + @scale*document.viewcontroller.images[@image].image.width/2)) * 0.005
+				@direction.y = (@enemyspotted.y - (@position.y + @scale*document.viewcontroller.images[@image].image.height/2)) * 0.005 
+				norm = Math.sqrt( @direction.x ^2 + @direction.y ^2 );
+				if norm < .2 
+					norm = .2;
+				@direction.x = @direction.x / norm;
+				@direction.y = @direction.y / norm;
+				if @enemyspotted.distance < 30
+					@targetfish.health -= (damage * 0.1);
 		
 		if @health == 0 
 			alert "Fish is dead"
 			@alive = false
 		
 
-		enemyspotted = @nearest_fish()
-		if enemyspotted.x > -1
-			#alert enemyspotted.x
-			@direction.x = (enemyspotted.x - (@position.x + @scale*document.viewcontroller.images[@image].image.width/2)) * 0.005
-			@direction.y = (enemyspotted.y - (@position.y + @scale*document.viewcontroller.images[@image].image.height/2)) * 0.005 
-			norm = Math.sqrt( @direction.x ^2 + @direction.y ^2 );
-			if norm < .2 
-				norm = .2;
-			@direction.x = @direction.x / norm;
-			@direction.y = @direction.y / norm;
-			if enemyspotted.distance < 30
-					
 
-				@scale += 0.01 * @fish_raw.growth_rate if @fish_raw.growth_rate?
-				#alert "I ate pellet #{enemyspotted.pellet}"
+		
 
 		closest = @nearest_pellet()
 		if closest.x > -1
@@ -148,7 +149,7 @@ class Fish
 			if(@position.y < viewcontroller.canvas.height - 0.5*viewcontroller.images[@image].image.height - 50) 
 				@position.y += 0.5;
 				if @health > 0
-					@health -= 1;
+					@health -= 0;
 
 
 		if(@position.x > viewcontroller.canvas.width - 0.5*viewcontroller.images[@image].image.width || @position.x < document.tank.pixelwaterline) 

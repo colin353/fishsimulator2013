@@ -31,6 +31,12 @@ Fish = (function() {
     };
     this.fight = false;
     this.aggression = null;
+    this.targetfish = null;
+    this.enemyspotted = {
+      x: null,
+      y: null
+    };
+    this.happiness = 0;
   }
 
   Fish.prototype.temp_ok = function() {
@@ -102,11 +108,10 @@ Fish = (function() {
         targetfishdist = distance;
         targetpos = {
           x: f.position.x,
-          y: f.position.y,
-          f: f
+          y: f.position.y
         };
         targetpos.fish = i;
-        targetfish = f;
+        this.targetfish = f;
         i++;
       }
     }
@@ -125,7 +130,7 @@ Fish = (function() {
       ys = p.position.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2);
       ys = ys * ys;
       distance_fish = Math.sqrt(xs + ys);
-      if (distance < 10) {
+      if (distance < 50) {
         return true;
       }
     }
@@ -135,39 +140,36 @@ Fish = (function() {
     var chance;
 
     chance = Math.random * 100;
-    if (chance > (99 - this.aggression)) {
+    if (chance > (50 - this.aggression)) {
       return true;
     }
   };
 
   Fish.prototype.tick = function() {
-    var closest, enemyspotted, flip, is_near_fish, norm, reverse, target_victim;
+    var closest, flip, norm, reverse;
 
     this.aggression = this.fish_raw.aggression + (-0.1 * this.health) - this.happiness;
-    if (is_near_fish = true) {
+    if (this.is_near_fish === true) {
       if (this.fight_chance() === true) {
-        target_victim = this.nearest_fish;
+        this.enemyspotted = this.nearest_fish();
+      }
+      if (this.enemyspotted.x > -1) {
+        this.direction.x = (this.enemyspotted.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2)) * 0.005;
+        this.direction.y = (this.enemyspotted.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2)) * 0.005;
+        norm = Math.sqrt(this.direction.x ^ 2 + this.direction.y ^ 2);
+        if (norm < .2) {
+          norm = .2;
+        }
+        this.direction.x = this.direction.x / norm;
+        this.direction.y = this.direction.y / norm;
+        if (this.enemyspotted.distance < 30) {
+          this.targetfish.health -= damage * 0.1;
+        }
       }
     }
     if (this.health === 0) {
       alert("Fish is dead");
       this.alive = false;
-    }
-    enemyspotted = this.nearest_fish();
-    if (enemyspotted.x > -1) {
-      this.direction.x = (enemyspotted.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2)) * 0.005;
-      this.direction.y = (enemyspotted.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2)) * 0.005;
-      norm = Math.sqrt(this.direction.x ^ 2 + this.direction.y ^ 2);
-      if (norm < .2) {
-        norm = .2;
-      }
-      this.direction.x = this.direction.x / norm;
-      this.direction.y = this.direction.y / norm;
-      if (enemyspotted.distance < 30) {
-        if (this.fish_raw.growth_rate != null) {
-          this.scale += 0.01 * this.fish_raw.growth_rate;
-        }
-      }
     }
     closest = this.nearest_pellet();
     if (closest.x > -1) {
@@ -200,7 +202,7 @@ Fish = (function() {
       if (this.position.y < viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50) {
         this.position.y += 0.5;
         if (this.health > 0) {
-          this.health -= 1;
+          this.health -= 0;
         }
       }
     }

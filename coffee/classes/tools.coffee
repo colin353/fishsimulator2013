@@ -153,3 +153,5 @@ class WaterTool
 		if document.tank.waterline < 100
 			document.tank.waterline += 0.025;
 			document.tank.salt -= 50 / document.tank.waterline if document.tank.salt > 0
+			document.tank.waste -= 50 / document.tank.waterline if document.tank.waste > 0
+			
