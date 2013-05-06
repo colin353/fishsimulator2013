@@ -1,0 +1,9 @@
+{
+	"name" : "Cheap Filter",
+	"price" : 100,
+	"image" : "filter1.png",
+	"description" : "An inexpensive, but terrible, filter.",
+	"scale" : 0.7,
+
+	"waste_filtered" : 0.3
+}

@@ -150,7 +150,7 @@ HandTool = (function() {
     var distance, thisfish, xs, ys, _i, _len, _ref, _results;
 
     this.grabbed = null;
-    _ref = document.tankcontroller.fishes.concat(document.tankcontroller.corals);
+    _ref = document.tankcontroller.fishes.concat(document.tankcontroller.corals, document.tankcontroller.machines);
     _results = [];
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       thisfish = _ref[_i];
@@ -239,7 +239,7 @@ SiphonTool = (function() {
       viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
     }
     if (document.tank.waterline > 30) {
-      return document.tank.waterline -= 1;
+      return document.tank.waterline -= 0.01;
     }
   };
 
@@ -265,7 +265,10 @@ WaterTool = (function() {
       viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
     }
     if (document.tank.waterline < 100) {
-      return document.tank.waterline += 1;
+      document.tank.waterline += 0.01;
+      if (document.tank.salt > 0) {
+        return document.tank.salt -= 10 / document.tank.waterline;
+      }
     }
   };
 

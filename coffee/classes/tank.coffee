@@ -16,10 +16,12 @@ class Tank
 	tick: ->
 		viewcontroller.renderSprite(@image,0,0,1.2)
 
-		@pixelwaterline = (@waterline - 100) * 400 + 50;
+		@pixelwaterline = (100 - @waterline) * 100 + 50;
 
 		viewcontroller.renderSprite(@waterimage,0,@pixelwaterline,1.2)
 		viewcontroller.renderSprite(@waterimage,400,@pixelwaterline,1.2)  
+
+		@temperature -= (@temperature - 60) * 0.1;
 		
 		# Render all stats
 		$("#tank_supply").css('width',@supply+'%');

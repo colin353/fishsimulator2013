@@ -15,16 +15,22 @@ class BuyMenuController
 		@corals = [];
 		@corals.push new Coral(f) for f in coral_files
 
+		machine_files = sync_get 'game/assets/glob.php?type=machines'
+		machine_files = JSON.parse machine_files
+
+		@machines = [];
+		@machines.push new Machine(f) for f in machine_files
+
 		@refresh() 
 
-		for a in @fishes.concat @corals
+		for a in @fishes.concat @corals, @machines 
 			unique = md5(a.filename)
 			$("#buythis#{unique}").data('jsonfile',a.filename).data('type',a.type).click ->
 				document.tool = new BuyTool($(this).data('jsonfile'),$(this).data('type'),document.tool);
 
 	refresh: ->
 		html = "";
-		for a in @fishes.concat @corals
+		for a in @fishes.concat @corals, @machines
 			desc = "This item has no description whatsoever."
 			desc = a.description if a.description?
 			html += @buymenu_mediaObject {

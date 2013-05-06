@@ -24,6 +24,10 @@ class FishTankCanvasController
 		@corals.push new Coral('BrainCoral.json')
 		@corals[3].position = {x: 200, y:200}
 		@tank = new Tank('TankBackground.jpg')
+
+		@machines = [];
+		@machines.push new Machine('filter.json')
+
 		document.tank = @tank;
 		document.tankcontroller = @
 
@@ -32,6 +36,7 @@ class FishTankCanvasController
 		# First thing is to render the background image
 		
 		@tank.tick()
+		a.tick() for a in @machines
 		a.tick() for a in @corals
 		a.tick() for a in @fishes
 		a.tick() for a in @pellets

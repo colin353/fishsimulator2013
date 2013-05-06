@@ -16,9 +16,10 @@ Tank = (function() {
 
   Tank.prototype.tick = function() {
     viewcontroller.renderSprite(this.image, 0, 0, 1.2);
-    this.pixelwaterline = (this.waterline - 100) * 400 + 50;
+    this.pixelwaterline = (100 - this.waterline) * 100 + 50;
     viewcontroller.renderSprite(this.waterimage, 0, this.pixelwaterline, 1.2);
     viewcontroller.renderSprite(this.waterimage, 400, this.pixelwaterline, 1.2);
+    this.temperature -= (this.temperature - 60) * 0.1;
     $("#tank_supply").css('width', this.supply + '%');
     $("#tank_salt").css('width', this.salt + '%');
     $("#tank_waste").css('width', this.waste + '%');
