@@ -6,6 +6,8 @@
 	"salt_min" : 25,
 	"aggressiveness" : 10,
 	"hitpoints" : 150,
+	"temp_max" : 80,
+	"temp_min" : 30,
 	"strength" : 5,
 	"growth_rate" : 4,
 	"crustacean" : 0,

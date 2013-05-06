@@ -4,6 +4,8 @@
 	"image" : "minnow.png",
 	"salt_max" : 30,
 	"salt_min" : 0,
+	"temp_max" : 80,
+	"temp_min" : 30,
 	"aggressiveness" : 1,
 	"hitpoints" : 50,
 	"strength" : 1,

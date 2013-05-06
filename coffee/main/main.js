@@ -20,6 +20,7 @@ $(function() {
   document.tools['siphon'] = new SiphonTool('siphon.png');
   document.tools['water'] = new WaterTool('water.png');
   document.tool = document.tools['hand'];
+  document.tool = document.tools['siphon'];
   return document.buymenu = new BuyMenuController();
 });
 

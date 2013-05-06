@@ -7,9 +7,11 @@
 	"aggressiveness" : 10 ,
 	"hitpoints" : 200,
 	"strength" : 8,
+	"temp_max" : 80,
+	"temp_min" : 30,
 	"growth_rate" : 0.2,
 	"crustacean" : 0,
 	"scale" : 0.6,
 	"description" : "A very aggressive fish with tendencies to randomly murder other tankmates....",
-	"alive" : true
+	"alive" : false
 }	 	

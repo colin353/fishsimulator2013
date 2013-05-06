@@ -139,6 +139,8 @@
         x: Math.random(),
         y: Math.random()
       };
+      this.fight = false;
+      this.aggression = null;
     }
 
     Fish.prototype.salt_ok = function() {
@@ -180,7 +182,41 @@
       return bestpos;
     };
 
-    Fish.prototype.near_fish = function() {
+    Fish.prototype.nearest_fish = function() {
+      var distance, f, i, targetfish, targetfishdist, targetpos, xs, ys, _i, _len, _ref;
+
+      targetfishdist = 1000;
+      targetpos = {
+        x: -1,
+        y: -1
+      };
+      i = 0;
+      targetfish = null;
+      _ref = document.tankcontroller.fishes;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        f = _ref[_i];
+        xs = f.position.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2);
+        xs = xs * xs;
+        ys = f.position.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2);
+        ys = ys * ys;
+        distance = Math.sqrt(xs + ys);
+        if (distance < targetfishdist) {
+          targetfishdist = distance;
+          targetpos = {
+            x: f.position.x,
+            y: f.position.y,
+            f: f
+          };
+          targetpos.fish = i;
+          targetfish = f;
+          i++;
+        }
+      }
+      targetpos.distance = targetfishdist;
+      return targetpos;
+    };
+
+    Fish.prototype.is_near_fish = function() {
       var distance_fish, f, xs, ys, _i, _len, _ref;
 
       _ref = document.tankcontroller.fishes;
@@ -197,13 +233,43 @@
       }
     };
 
-    Fish.prototype.tick = function() {
-      var closest, flip, isnearfish, norm, reverse;
+    Fish.prototype.fight_chance = function() {
+      var chance;
 
-      isnearfish = this.near_fish;
+      chance = Math.random * 100;
+      if (chance > (99 - this.aggression)) {
+        return true;
+      }
+    };
+
+    Fish.prototype.tick = function() {
+      var closest, enemyspotted, flip, is_near_fish, norm, reverse, target_victim;
+
+      this.aggression = this.fish_raw.aggression + (-0.1 * this.health) - this.happiness;
+      if (is_near_fish = true) {
+        if (this.fight_chance() === true) {
+          target_victim = this.nearest_fish;
+        }
+      }
       if (this.health === 0) {
         alert("Fish is dead");
         this.alive = false;
+      }
+      enemyspotted = this.nearest_fish();
+      if (enemyspotted.x > -1) {
+        this.direction.x = (enemyspotted.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2)) * 0.005;
+        this.direction.y = (enemyspotted.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2)) * 0.005;
+        norm = Math.sqrt(this.direction.x ^ 2 + this.direction.y ^ 2);
+        if (norm < .2) {
+          norm = .2;
+        }
+        this.direction.x = this.direction.x / norm;
+        this.direction.y = this.direction.y / norm;
+        if (enemyspotted.distance < 30) {
+          if (this.fish_raw.growth_rate != null) {
+            this.scale += 0.01 * this.fish_raw.growth_rate;
+          }
+        }
       }
       closest = this.nearest_pellet();
       if (closest.x > -1) {
@@ -235,7 +301,9 @@
       if (this.salt_ok() === false) {
         if (this.position.y < viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 50) {
           this.position.y += 0.5;
-          this.health -= 0.3;
+          if (this.health > 0) {
+            this.health -= 1;
+          }
         }
       }
       if (this.position.x > viewcontroller.canvas.width - 0.5 * viewcontroller.images[this.image].image.width || this.position.x < document.tank.pixelwaterline) {
@@ -1097,6 +1165,7 @@
     document.tools['siphon'] = new SiphonTool('siphon.png');
     document.tools['water'] = new WaterTool('water.png');
     document.tool = document.tools['hand'];
+    document.tool = document.tools['siphon'];
     return document.buymenu = new BuyMenuController();
   });
 

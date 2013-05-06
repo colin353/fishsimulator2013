@@ -6,6 +6,8 @@
 	"salt_min" : 0,
 	"scale" : 1,
 	"crustacean" : 1,
+	"temp_max" : 80,
+	"temp_min" : 30,
 	"growth_rate" : 4,
 	"hitpoints" : 100,
 	"description" : "A small crustacean who will clean up algae from your tank.",
