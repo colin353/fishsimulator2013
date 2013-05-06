@@ -49,7 +49,7 @@ class CoolTool
 	constructor: (image) ->
 		@image = image;  
 		viewcontroller.loadImages image if image?
-		@scale = 1;
+		@scale = 2;
 
 	click: (x,y) ->
 		yes

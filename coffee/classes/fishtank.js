@@ -10,6 +10,7 @@ FishTankCanvasController = (function() {
     this.fishes.push(new Fish('clownfish.json'));
     this.fishes.push(new Fish('minnow.json'));
     this.fishes.push(new Fish('hermitcrab.json'));
+    this.fishes.push(new Fish('pufferfish.json'));
     this.corals = [];
     this.corals.push(new Coral('TubeCoralOrange.json'));
     this.corals[0].position = {

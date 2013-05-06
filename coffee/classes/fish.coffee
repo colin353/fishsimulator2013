@@ -19,6 +19,8 @@ class Fish
 		viewcontroller.loadImages @image;
 		@position = {x: 0, y: 0}; 
 		@direction = {x: Math.random(), y: Math.random()};
+		@health = @fish_raw.hitpoints
+		@dead = @fish_raw.alive
 
 	salt_ok: ->
 		if document.tank.salt > @fish_raw.salt_max or document.tank.salt < @fish_raw.salt_min

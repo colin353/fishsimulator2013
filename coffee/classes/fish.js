@@ -27,6 +27,8 @@ Fish = (function() {
       x: Math.random(),
       y: Math.random()
     };
+    this.health = this.fish_raw.hitpoints;
+    this.dead = this.fish_raw.alive;
   }
 
   Fish.prototype.salt_ok = function() {

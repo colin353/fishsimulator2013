@@ -90,7 +90,7 @@ CoolTool = (function() {
     if (image != null) {
       viewcontroller.loadImages(image);
     }
-    this.scale = 1;
+    this.scale = 2;
   }
 
   CoolTool.prototype.click = function(x, y) {

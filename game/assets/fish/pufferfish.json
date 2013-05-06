@@ -1,0 +1,15 @@
+{
+	"name" : "Puffer Fish",
+	"price" : 10000,
+	"image" : "pufferfish.png",
+	"salt_max" : 80,
+	"salt_min" : 20,
+	"aggressiveness" : 10 ,
+	"hitpoints" : 200,
+	"strength" : 8,
+	"growth_rate" : 0.2,
+	"crustacean" : 0,
+	"scale" : 0.3,
+	"description" : "A very aggressive fish with tendencies to randomly murder other tankmates....",
+	"alive" : 1
+}	 	
