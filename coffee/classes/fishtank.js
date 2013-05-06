@@ -4,6 +4,8 @@ var FishTankCanvasController;
 FishTankCanvasController = (function() {
   function FishTankCanvasController() {
     this.relinquishcontrol = false;
+    this.pellets = [];
+    this.pellets.push(new Pellet('pellet.json'));
     this.fishes = [];
     this.fishes.push(new Fish('clownfish.json'));
     this.fishes.push(new Fish('minnow.json'));
@@ -35,7 +37,7 @@ FishTankCanvasController = (function() {
   }
 
   FishTankCanvasController.prototype.tick = function() {
-    var a, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2;
+    var a, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _ref3;
 
     this.tank.tick();
     _ref = this.corals;
@@ -48,9 +50,14 @@ FishTankCanvasController = (function() {
       a = _ref1[_j];
       a.tick();
     }
-    _ref2 = viewcontroller.inputstack;
+    _ref2 = this.pellets;
     for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
       a = _ref2[_k];
+      a.tick();
+    }
+    _ref3 = viewcontroller.inputstack;
+    for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
+      a = _ref3[_l];
       if (a.type === 'M') {
         document.tool.click(a.x, a.y);
       }
