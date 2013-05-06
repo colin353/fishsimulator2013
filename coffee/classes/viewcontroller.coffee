@@ -58,6 +58,10 @@ class ViewController
 			document.tool = document.tools['hand']
 		$("#salttool").click ->
 			document.tool = document.tools['salt']
+		$("#siphontool").click ->
+			document.tool = document.tools['siphon']
+		$("#watertool").click ->
+			document.tool = document.tools['water']
 
 
 	ready: ->
