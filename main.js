@@ -616,11 +616,7 @@
         viewcontroller.renderSprite(this.image, x - this.scale * viewcontroller.images[this.image].image.width / 2, y - this.scale * viewcontroller.images[this.image].image.height / 2, this.scale);
       }
       if (document.tank.waste > 0) {
-<<<<<<< HEAD
         return document.tank.waste -= 0.2;
-=======
-        return document.tank.waste -= 2;
->>>>>>> 4c43b5d6d3f8e194592350fdcd625cd8c55a301b
       }
     };
 

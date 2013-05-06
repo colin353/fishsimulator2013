@@ -28,7 +28,7 @@ class Fish
 
 	nearest_pellet: ->
 		bestdistance = 200;
-		bestpos = {x: -1, y: -1}
+		bestpos = {x: -1, y: -1} 
 		i = 0;
 		for p in document.tankcontroller.pellets
 			xs =  p.position.x - (@position.x + @scale*document.viewcontroller.images[@image].image.width/2);
