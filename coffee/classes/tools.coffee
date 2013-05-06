@@ -26,7 +26,11 @@ class SpongeTool
 	hold: (x,y) ->
 		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
 		if document.tank.waste > 0
+<<<<<<< HEAD
 			document.tank.waste -=0.2;
+=======
+			document.tank.waste -=2;
+>>>>>>> 4c43b5d6d3f8e194592350fdcd625cd8c55a301b
 
 class FeedTool
 	constructor: (image) ->
@@ -122,3 +126,31 @@ class BuyTool
 
 	hold: (x,y) ->
 		yes
+
+class SiphonTool
+	constructor: (image) ->
+		@image = image;  
+		@scale = 0.6;
+		viewcontroller.loadImages @image if @image?
+
+	click: (x,y) ->
+		@hold(x,y)
+
+	hold: (x,y) ->
+		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
+		if document.tank.waste > 0
+			document.tank.waste -=2;
+
+class WaterTool
+	constructor: (image) ->
+		@image = image;  
+		@scale = 0.6;
+		viewcontroller.loadImages @image if @image?
+
+	click: (x,y) ->
+		@hold(x,y)
+
+	hold: (x,y) ->
+		viewcontroller.renderSprite(@image,x-@scale*viewcontroller.images[@image].image.width/2,y-@scale*viewcontroller.images[@image].image.height/2,@scale) if @image? # At mouse coordinates?
+		if document.tank.waste > 0
+			document.tank.waste -=2;

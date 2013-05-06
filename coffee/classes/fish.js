@@ -128,7 +128,11 @@ Fish = (function() {
     if (this.crustacean === 1) {
       this.position.y = viewcontroller.canvas.height - 0.5 * viewcontroller.images[this.image].image.height - 120;
     }
-    return document.tank.waste += 0.02;
+    document.tank.waste += 0.02;
+    if (Math.floor(Math.random() * 100) === 28) {
+      this.direction.x = Math.random() - 0.5;
+      return this.direction.y = Math.random() - 0.5;
+    }
   };
 
   return Fish;
