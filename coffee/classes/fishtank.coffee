@@ -2,7 +2,6 @@
 #= require coral.coffee
 #= require tools.coffee
 #= require pellet.coffee
-# The Overlay 
 
 class FishTankCanvasController
 	constructor: ->

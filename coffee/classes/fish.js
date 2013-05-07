@@ -12,6 +12,7 @@ Fish = (function() {
     this.image = this.fish_raw.image;
     this.price = this.fish_raw.price;
     this.name = this.fish_raw.name;
+    this.fighting_now = false;
     this.crustacean = this.fish_raw.crustacean;
     this.health = this.fish_raw.hitpoints;
     this.alive = this.fish_raw.alive;
@@ -30,13 +31,21 @@ Fish = (function() {
       y: Math.random()
     };
     this.fight = false;
-    this.aggression = null;
+    this.aggression = 2;
+    this.aggressiveness = 2;
+    if (this.fish_raw.aggressiveness != null) {
+      this.aggressiveness = this.fish_raw.aggressiveness;
+    }
     this.targetfish = null;
     this.enemyspotted = {
       x: null,
       y: null
     };
     this.happiness = 0;
+    this.damage = .5;
+    if (this.fish_raw.damage != null) {
+      this.damage = this.fish_raw.damage;
+    }
   }
 
   Fish.prototype.temp_ok = function() {
@@ -101,103 +110,60 @@ Fish = (function() {
   };
 
   Fish.prototype.nearest_fish = function() {
-    var distance, f, i, targetfish, targetfishdist, targetpos, xs, ys, _i, _len, _ref;
+    var best, bestfish, d, f, _i, _len, _ref;
 
-    targetfishdist = 100;
-    targetpos = {
-      x: -1,
-      y: -1
-    };
-    i = 0;
-    targetfish = null;
+    best = 100;
+    bestfish = null;
     _ref = document.tankcontroller.fishes;
     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
       f = _ref[_i];
-      xs = f.position.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2);
-      xs = xs * xs;
-      ys = f.position.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2);
-      ys = ys * ys;
-      distance = Math.sqrt(xs + ys);
-      if (distance < targetfishdist) {
-        targetfishdist = distance;
-        targetpos = {
-          x: f.position.x,
-          y: f.position.y
-        };
-        targetpos.fish = i;
-        this.targetfish = f;
-        i++;
+      if (f === this) {
+        continue;
+      }
+      d = calculate_distance(f.position, this.position);
+      if (d < best) {
+        best = d;
+        bestfish = f;
       }
     }
-    targetpos.distance = targetfishdist;
-    return targetpos;
-  };
-
-  Fish.prototype.is_near_fish = function() {
-    var distance_fish, f, xs, ys, _i, _len, _ref;
-
-    _ref = document.tankcontroller.fishes;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      f = _ref[_i];
-      xs = p.position.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2);
-      xs = xs * xs;
-      ys = p.position.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2);
-      ys = ys * ys;
-      distance_fish = Math.sqrt(xs + ys);
-      if (distance < 50) {
-        return true;
-      }
-    }
+    return bestfish;
   };
 
   Fish.prototype.fight_chance = function() {
-    var chance;
-
-    chance = Ma0th.random * 100;
-    if (chance > (50 - this.aggression)) {
+    if (Math.random() < 0.001) {
       return true;
     }
+    return false;
   };
 
   Fish.prototype.tick = function() {
-    var closest, enemyspotted, flip, norm, reverse;
+    var closest, dr, flip, neighbor, norm, reverse;
 
-    this.aggression = this.fish_raw.aggression + (-0.1 * this.health) - this.happiness;
-    if (this.is_near_fish === true) {
-      if (this.fight_chance() === true) {
-        this.enemyspotted = this.nearest_fish();
+    neighbor = this.nearest_fish();
+    if ((neighbor != null) && (this.fight_chance() || this.fighting_now)) {
+      this.fighting_now = true;
+      neighbor.fighting_now = true;
+      console.log("Fight between " + this.name + " and " + neighbor.name + "!");
+      dr = calculate_difference(neighbor.position, this.position);
+      norm = calculate_distance(dr);
+      if (norm < 0.2) {
+        norm = 0.2;
       }
-      if (this.enemyspotted.x > -1) {
-        this.direction.x = (this.enemyspotted.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2)) * 0.005;
-        this.direction.y = (this.enemyspotted.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2)) * 0.005;
-        norm = Math.sqrt(this.direction.x ^ 2 + this.direction.y ^ 2);
-        if (norm < .2) {
-          norm = .2;
-        }
-        this.direction.x = this.direction.x / norm;
-        this.direction.y = this.direction.y / norm;
-        if (this.enemyspotted.distance < 30) {
-          this.targetfish.health -= damage * 0.1;
-        }
+      if (norm < 10) {
+        neighbor.health -= this.damage;
+        console.log("" + this.name + " dealt massive damage to " + neighbor.name + " (" + neighbor.health + ")!");
+      } else {
+        this.direction.x = 0.4 * dr.x / norm;
+        this.direction.y = 0.4 * dr.y / norm;
+        console.log("A huge lunge! " + norm);
       }
     }
-    if (this.health === 0) {
+    if (this.health <= 0) {
       alert("Your " + this.name + " has died!");
       this.annhilate();
     }
-    enemyspotted = this.nearest_fish();
-    if (enemyspotted.x > -1) {
-      this.direction.x = (enemyspotted.x - (this.position.x + this.scale * document.viewcontroller.images[this.image].image.width / 2)) * 0.005;
-      this.direction.y = (enemyspotted.y - (this.position.y + this.scale * document.viewcontroller.images[this.image].image.height / 2)) * 0.005;
-      norm = Math.sqrt(this.direction.x ^ 2 + this.direction.y ^ 2);
-      if (norm < .2) {
-        norm = .2;
-      }
-      this.direction.x = this.direction.x / norm;
-      this.direction.y = this.direction.y / norm;
-      if (enemyspotted.distance < 30) {
-        true;
-      }
+    if (this.fighting_now && Math.random() < 0.008) {
+      this.fighting_now = false;
     }
     closest = this.nearest_pellet();
     if (closest.x > -1) {
@@ -222,7 +188,7 @@ Fish = (function() {
       this.position.x += this.direction.x * 10;
       this.position.y += this.direction.y * 10;
     }
-    if (document.tank.temperature < 60) {
+    if (this.fighting_now || document.tank.temperature < 60) {
       this.position.x += (Math.random() - 0.5) * 10;
       this.position.y += (Math.random() - 0.5) * 10;
     }
@@ -262,8 +228,9 @@ Fish = (function() {
     document.tank.waste += 0.02;
     if (Math.floor(Math.random() * 100) === 28) {
       this.direction.x = Math.random() - 0.5;
-      return this.direction.y = Math.random() - 0.5;
+      this.direction.y = Math.random() - 0.5;
     }
+    return true;
   };
 
   return Fish;
